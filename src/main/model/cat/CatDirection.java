@@ -23,9 +23,7 @@ public class CatDirection {
             this.facing = BACKWARD;
             return;
         }
-        if (facing.equals(BACKWARD)) {
-            this.facing = FORWARD;
-        }
+        this.facing = FORWARD;
     }
 
     // MODIFIES: this
@@ -35,9 +33,7 @@ public class CatDirection {
             this.side = RIGHT;
             return;
         }
-        if (side.equals(RIGHT)) {
-            this.side = LEFT;
-        }
+        this.side = LEFT;
     }
 
     // EFFECTS: returns the way the cat is facing
