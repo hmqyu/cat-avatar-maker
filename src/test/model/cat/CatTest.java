@@ -84,6 +84,11 @@ class CatTest {
         assertFalse(changeAccessoriesCat.removeAccessory("hat"));
         assertFalse(changeAccessoriesCat.removeAccessory("tomato"));
         assertEquals("scarf, and bag", changeAccessoriesCat.getAllAccessories());
+
+        changeAccessoriesCat.removeAllAccessories();
+        assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
+        constructorCat.removeAllAccessories();
+        assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
     }
 
     @Test
