@@ -6,10 +6,9 @@ My proposed application is a play on the typical avatar makers found online: ins
 headshots, there are **cats taking the form of old-school, 200x200 pixels**. These are fully 
 customizable - in fact, you can customize anything and everything possible, including:
  
-- Colours (eyes, fur, markings, etc.) 
-- Adding accessories (bows, collars, and even wings)
-- Adjusting body proportions (short cat, tall cat, thin cat, fat cat!)
-- Giving it one or all mini-animations (bounce, tail flick, blinking...)
+- Colours (eyes, nose, markings, etc.) 
+- Adding accessories (hats, bags, and even wings) and backgrounds
+- Changing the direction it's facing
 
 This app is aimed at the general public, with a specific emphasis on those who like cats and
 avatar makers in general. I have a lot of friends in the artist community that use avatar 
