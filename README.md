@@ -19,8 +19,7 @@ demonstrate both of my skills (while also showing my love for cats!).
 
 ## User Stories
 
-- As a user, I want to be able to modify different features of my cat
-- As a user, I want to be able to add accessories, animations, and backgrounds to my cat
-- As a user, I want to be able to save different cats to a collection of saved cats
-- As a user, I want to be able to randomly generate a cat
-- As a user, I want the cat to "meow" when I click/pat its head
+- As a user, I want to be able to change the body, colours, and patterns of my cat pixel.
+- As a user, I want to be able to add accessories or a background to my cat pixel.
+- As a user, I want to be able to make the cat pixel face left or right.
+- As a user, I want to be able to name my cat.
