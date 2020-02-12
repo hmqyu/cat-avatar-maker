@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CatMaker {
     private Scanner userInput;
-    private int count = 0;
+    private boolean newCat = true;
     private Cat userCat;
     private String catName;
 
@@ -91,17 +91,18 @@ public class CatMaker {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: give a name to or renames a cat
+    // MODIFIES: this and newCat
+    // EFFECTS: if a newCat, gives the cat a name and changes newCat to false
+    //          otherwise, renames a cat
     private void nameCommand() {
-        if (count == 0) {
+        if (newCat) {
             System.out.println("\nWhat would you like to name your cat?");
             String name = userInput.next();
             userCat.changeName(name);
             System.out.println("\nYou named your cat " + name + "!");
-            count++;
+            newCat = false;
         } else {
-            System.out.println("What would you like to name " + catName + " to?");
+            System.out.println("What would you like to rename " + catName + " to?");
             String name = userInput.next();
             userCat.changeName(name);
             System.out.println("\n" + catName + " has been renamed to " + name + "!");
@@ -198,7 +199,7 @@ public class CatMaker {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds an accessory, or removes one or all accessories from a cat
+    // EFFECTS: edits the accessories (if any) on a cat
     private void accessoriesCommand() {
         if (userCat.getAllAccessories().equals("no accessories")) {
             addAccessoryCommand();
@@ -223,6 +224,8 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds an accessory to a cat
     private void addAccessoryCommand() {
         System.out.println("\nWhat accessory would you like to add to " + catName + "?");
         System.out.println("It's currently wearing " + userCat.getAllAccessories() + ".");
@@ -244,6 +247,8 @@ public class CatMaker {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes an accessory from a cat
     private void removeAccessoryCommand() {
         System.out.println("\nWhat accessory would you like to remove from " + catName + "?");
         System.out.println("It's currently wearing " + userCat.getAllAccessories() + ".");
@@ -257,6 +262,8 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes all accessories on a cat
     private void removeAllAccessoryCommand() {
         System.out.println("\nWARNING: This action cannot be reversed. ");
         System.out.println("Are you sure you would like to remove all accessories? (Type yes or no):");
@@ -273,6 +280,8 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: edits the background of a cat
     private void backgroundCommand() {
         if (userCat.emptyBackground()) {
             changeBackgroundCommand();
@@ -294,6 +303,8 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the background of a cat
     private void changeBackgroundCommand() {
         System.out.println("\nWhat would you like to change " + catName + "'s background to?");
         System.out.println("\tbeach");
@@ -311,6 +322,8 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the background of a cat
     private void removeBackgroundCommand() {
         System.out.println("\nWARNING: This action cannot be reversed.");
         System.out.println("Are you sure you would like to remove the background? (Type yes or no):");
@@ -327,6 +340,7 @@ public class CatMaker {
         }
     }
 
+    // EFFECTS: displays a description of the cat and stays there until the user inputs something
     private void descriptionCommand() {
         System.out.println("\n" + catName + "'s Description");
         System.out.println(catName + " is a " + userCat.getBase() + " " + userCat.getPattern() + " cat.");
@@ -334,8 +348,14 @@ public class CatMaker {
         System.out.println(catName + " is currently wearing " + userCat.getAllAccessories() + ".");
         System.out.println(catName + " currently has a(n) " + userCat.getBackground() + " background.");
         System.out.println(catName + " is facing " + userCat.getDirection() + ".");
+        System.out.println("\nPlease type anything to continue...");
+        String command = userInput.next();
+        while (command.equals("")) {
+            command = userInput.next();
+        }
     }
 
+    // EFFECTS: displays a description of the commands that can be used and stays there until the user inputs something
     private void helpCommand() {
         System.out.println("\nname: changes " + catName + "'s name.");
         System.out.println("base: changes " + catName + "'s current base colour.");
