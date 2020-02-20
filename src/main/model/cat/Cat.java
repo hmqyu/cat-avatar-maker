@@ -1,5 +1,6 @@
 package model.cat;
 
+import model.addons.Accessory;
 import model.addons.Background;
 
 // Represents a cat with a name, base colour, coat pattern, nose colour,
@@ -11,7 +12,7 @@ public class Cat {
     private String nose;                // the cat's current nose colour
     private String eyes;                // the cat's current eye colour
     private CatDirection direction;     // the cat's current direction (where it's facing and turned to)
-    private CatAccessory accessories;   // the cat's current accessories
+    private Accessory accessories;   // the cat's current accessories
     private Background background;      // the cat's current background
 
     // EFFECTS: creates a cat with no name (ie. "your cat") that is set to have
@@ -24,7 +25,7 @@ public class Cat {
         this.nose = "pink";
         this.eyes = "yellow";
         this.direction = new CatDirection();
-        this.accessories = new CatAccessory();
+        this.accessories = new Accessory();
         this.background = new Background();
     }
 
@@ -104,29 +105,29 @@ public class Cat {
     // EFFECTS: if the cat isn't wearing the accessory, adds it and returns true
     //          otherwise, returns false
     public boolean addAccessory(String accessory) {
-        return this.accessories.addCatAccessory(accessory);
+        return this.accessories.addAccessory(accessory);
     }
 
     // MODIFIES: this
     // EFFECTS: if the cat is wearing the accessory, removes it and returns true
     //          otherwise, returns false
     public boolean removeAccessory(String accessory) {
-        return this.accessories.removeCatAccessory(accessory);
+        return this.accessories.removeAccessory(accessory);
     }
 
     // MODIFIES: this
     // EFFECTS: removes all accessories from a cat
     public void removeAllAccessories() {
-        this.accessories.removeAllCatAccessories();
+        this.accessories.removeAccessories();
     }
 
     // EFFECTS: if the cat has no accessories, returns "no accessories"
     //          otherwise, returns the cat's current accessories
     public String getAllAccessories() {
-        if (accessories.getAllCatAccessories().equals("")) {
+        if (accessories.getAllAccessories().equals("")) {
             return "no accessories";
         }
-        return this.accessories.getAllCatAccessories();
+        return this.accessories.getAllAccessories();
     }
 
     // MODIFIES: this

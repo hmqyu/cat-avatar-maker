@@ -1,20 +1,20 @@
-package model.cat;
+package model.addons;
 
 import java.util.ArrayList;
 
-// Represents wearable cat accessories
-public class CatAccessory {
-    private ArrayList<String> accessories;   // the current list of cat accessories
+// Represents accessories currently worn by a cat
+public class Accessory {
+    private ArrayList<String> accessories;   // the current list of accessories worn by a cat
 
-    // EFFECTS: creates a new list of cat accessories
-    public CatAccessory() {
+    // EFFECTS: creates a new list of accessories
+    public Accessory() {
         accessories = new ArrayList<>();
     }
 
     // MODIFIES: this
     // EFFECTS: if accessory is in accessories, returns false
     //          otherwise, adds it to accessories and returns true
-    public boolean addCatAccessory(String accessory) {
+    public boolean addAccessory(String accessory) {
         if (accessories.contains(accessory)) {
             return false;
         }
@@ -26,7 +26,7 @@ public class CatAccessory {
     // EFFECTS: if accessories is empty, returns an empty string
     //          if accessories is a size of one, returns just that accessory
     //          if accessories is a size of two or more, returns accessories in the form of a string
-    public String getAllCatAccessories() {
+    public String getAllAccessories() {
         int count;
         String allAccessories = "";
 
@@ -49,13 +49,13 @@ public class CatAccessory {
     // MODIFIES: this
     // EFFECTS: if accessory is in accessories, removes it and returns true
     //          otherwise, returns false
-    public boolean removeCatAccessory(String accessory) {
+    public boolean removeAccessory(String accessory) {
         return accessories.remove(accessory);
     }
 
     // MODIFIES: this
     // EFFECTS: clears accessories
-    public void removeAllCatAccessories() {
+    public void removeAccessories() {
         accessories.clear();
     }
 

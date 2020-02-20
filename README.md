@@ -18,7 +18,9 @@ demonstrate both of my skills (while also showing my love for cats!).
 
 ## User Stories
 
+- As a user, I want to be able to name my cat.
 - As a user, I want to be able to change the body, colours, and patterns of my cat pixel.
 - As a user, I want to be able to add accessories or a background to my cat pixel.
 - As a user, I want to be able to make the cat pixel face left or right.
-- As a user, I want to be able to name my cat.
+- As a user, I want to be able to save a cat I've made to a cat collection.
+- As a user, I want to be able to reload a cat I've made from a cat collection.
