@@ -1,5 +1,7 @@
 package model.cat;
 
+import model.addons.Accessory;
+import model.addons.Background;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CatTest {
     private Cat constructorCat;
+    private Cat persistenceCat;
     private Cat changeDirectionCat;
     private Cat changeAccessoriesCat;
     private Cat changeBackgroundCat;
@@ -18,6 +21,10 @@ class CatTest {
         changeDirectionCat = new Cat();
         changeAccessoriesCat = new Cat();
         changeBackgroundCat = new Cat();
+
+        persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper",
+                new CatDirection("backward", "right"), new Accessory(),
+                new Background("nighttime"));
 
         changeMultipleCat = new Cat();
         changeMultipleCat.changeName("Al");
@@ -37,6 +44,18 @@ class CatTest {
         assertEquals("forward and to the right", constructorCat.getDirection());
         assertEquals("no accessories", constructorCat.getAllAccessories());
         assertEquals("empty", constructorCat.getBackground());
+    }
+
+    @Test
+    void testPersistenceConstructor() {
+        assertEquals("Heeny", persistenceCat.getName());
+        assertEquals("red", persistenceCat.getBase());
+        assertEquals("tabby", persistenceCat.getPattern());
+        assertEquals("pink", persistenceCat.getNose());
+        assertEquals("copper", persistenceCat.getEyes());
+        assertEquals("backward and to the right", persistenceCat.getDirection());
+        assertEquals("no accessories", persistenceCat.getAllAccessories());
+        assertEquals("nighttime", persistenceCat.getBackground());
     }
 
     @Test
@@ -71,19 +90,23 @@ class CatTest {
         assertTrue(changeAccessoriesCat.addAccessory("scarf"));
         assertTrue(changeAccessoriesCat.addAccessory("bag"));
         assertTrue(changeAccessoriesCat.addAccessory("wings"));
-        assertEquals("hat, scarf, bag, and wings", changeAccessoriesCat.getAllAccessories());
+        assertEquals("a hat, a scarf, a bag, and wings", changeAccessoriesCat.getAllAccessories());
 
         assertFalse(changeAccessoriesCat.addAccessory("hat"));
         assertFalse(changeAccessoriesCat.addAccessory("scarf"));
-        assertEquals("hat, scarf, bag, and wings", changeAccessoriesCat.getAllAccessories());
+        assertEquals("a hat, a scarf, a bag, and wings", changeAccessoriesCat.getAllAccessories());
 
         assertTrue(changeAccessoriesCat.removeAccessory("hat"));
         assertTrue(changeAccessoriesCat.removeAccessory("wings"));
-        assertEquals("scarf, and bag", changeAccessoriesCat.getAllAccessories());
+        assertTrue(changeAccessoriesCat.removeAccessory("scarf"));
+        assertEquals("a bag", changeAccessoriesCat.getAllAccessories());
 
         assertFalse(changeAccessoriesCat.removeAccessory("hat"));
         assertFalse(changeAccessoriesCat.removeAccessory("tomato"));
-        assertEquals("scarf, and bag", changeAccessoriesCat.getAllAccessories());
+        assertEquals("a bag", changeAccessoriesCat.getAllAccessories());
+
+        assertTrue(changeAccessoriesCat.addAccessory("amulet"));
+        assertEquals("a bag, and an amulet", changeAccessoriesCat.getAllAccessories());
 
         changeAccessoriesCat.removeAllAccessories();
         assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());

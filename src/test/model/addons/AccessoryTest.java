@@ -3,14 +3,17 @@ package model.addons;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccessoryTest {
 
     private Accessory constructorCA;
+    private Accessory persistenceCA;
+    private Accessory persistenceEmptyCA;
     private Accessory oneItemCA;
     private Accessory multiItemCA;
-    private Accessory oneFilledCA;
     private Accessory filledCA;
     private Accessory removeCA;
 
@@ -19,11 +22,18 @@ public class AccessoryTest {
         constructorCA = new Accessory();
         oneItemCA = new Accessory();
         multiItemCA = new Accessory();
-        oneFilledCA = new Accessory();
         filledCA = new Accessory();
         removeCA = new Accessory();
 
-        oneFilledCA.addAccessory("hat");
+        ArrayList<String> accessories = new ArrayList<>();
+        accessories.add("hat");
+        accessories.add("scarf");
+        accessories.add("horns");
+        persistenceCA = new Accessory(accessories);
+
+        ArrayList<String> emptyAccessories = new ArrayList<>();
+        emptyAccessories.add("");
+        persistenceEmptyCA = new Accessory(emptyAccessories);
 
         filledCA.addAccessory("hat");
         filledCA.addAccessory("scarf");
@@ -38,9 +48,20 @@ public class AccessoryTest {
 
     @Test
     void testConstructor() {
-        assertEquals("", constructorCA.getAllAccessories());
-        assertEquals("", oneItemCA.getAllAccessories());
-        assertEquals("", multiItemCA.getAllAccessories());
+        assertEquals(new ArrayList<>(), constructorCA.getAllAccessories());
+        assertEquals(new ArrayList<>(), oneItemCA.getAllAccessories());
+        assertEquals(new ArrayList<>(), multiItemCA.getAllAccessories());
+    }
+
+    @Test
+    void testPersistenceConstructor() {
+        ArrayList<String> persistenceTest = new ArrayList<>();
+        persistenceTest.add("hat");
+        persistenceTest.add("scarf");
+        persistenceTest.add("horns");
+        assertEquals(persistenceTest, persistenceCA.getAllAccessories());
+
+        assertEquals(new ArrayList<>(), persistenceEmptyCA.getAllAccessories());
     }
 
     @Test
@@ -62,14 +83,19 @@ public class AccessoryTest {
     void testRemoveCatAccessory() {
         assertTrue(removeCA.removeAccessory("hat"));
 
-        assertEquals("scarf, bag, wings, and horns", removeCA.getAllAccessories());
+        ArrayList<String> removeCAModified = new ArrayList<>();
+        removeCAModified.add("scarf");
+        removeCAModified.add("bag");
+        removeCAModified.add("wings");
+        removeCAModified.add("horns");
+        assertEquals(removeCAModified, removeCA.getAllAccessories());
 
         assertTrue(removeCA.removeAccessory("scarf"));
         assertTrue(removeCA.removeAccessory("bag"));
         assertTrue(removeCA.removeAccessory("wings"));
         assertTrue(removeCA.removeAccessory("horns"));
 
-        assertEquals("", removeCA.getAllAccessories());
+        assertEquals(new ArrayList<>(), removeCA.getAllAccessories());
 
         assertFalse(removeCA.removeAccessory("wings"));
         assertFalse(removeCA.removeAccessory("horns"));
@@ -77,20 +103,11 @@ public class AccessoryTest {
 
     @Test
     void testRemoveAllAccessories() {
-        constructorCA.removeAccessories();
-        assertEquals("", constructorCA.getAllAccessories());
+        constructorCA.removeAllAccessories();
+        assertEquals(new ArrayList<>(), constructorCA.getAllAccessories());
 
-        removeCA.removeAccessories();
-        assertEquals("", removeCA.getAllAccessories());
-    }
-
-    @Test
-    void testGetAllAccessories() {
-        assertEquals("", constructorCA.getAllAccessories());
-        assertEquals("", oneItemCA.getAllAccessories());
-        assertEquals("hat", oneFilledCA.getAllAccessories());
-        assertEquals("hat, scarf, and bag", filledCA.getAllAccessories());
-        assertEquals("hat, scarf, bag, wings, and horns", removeCA.getAllAccessories());
+        removeCA.removeAllAccessories();
+        assertEquals(new ArrayList<>(), removeCA.getAllAccessories());
     }
 
 }

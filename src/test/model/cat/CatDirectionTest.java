@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CatDirectionTest {
     private CatDirection constructorCD;
+    private CatDirection persistenceCD;
     private CatDirection flipRightCD;
     private CatDirection flipLeftCD;
     private CatDirection turnForwardCD;
@@ -23,6 +24,8 @@ public class CatDirectionTest {
         turnBackwardCD = new CatDirection();
         turnBackwardCD.turn();
         bothCD = new CatDirection();
+
+        persistenceCD = new CatDirection("backward", "right");
     }
 
     @Test
@@ -32,6 +35,12 @@ public class CatDirectionTest {
 
         assertEquals("forward", bothCD.getFacing());
         assertEquals("right", bothCD.getSide());
+    }
+
+    @Test
+    void testPersistenceConstructor() {
+        assertEquals("backward", persistenceCD.getFacing());
+        assertEquals("right", persistenceCD.getSide());
     }
 
     @Test

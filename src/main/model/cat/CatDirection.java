@@ -16,6 +16,12 @@ public class CatDirection {
         this.side = RIGHT;
     }
 
+    // EFFECTS: creates a direction with facing and side
+    public CatDirection(String facing, String side) {
+        this.facing = facing;
+        this.side = side;
+    }
+
     // MODIFIES: this
     // EFFECTS: turns the cat around to face the opposite way
     public void turn() {

@@ -2,10 +2,15 @@ package model.cat;
 
 import model.addons.Accessory;
 import model.addons.Background;
+import persistence.SaveData;
+import persistence.SaveDataReader;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 // Represents a cat with a name, base colour, coat pattern, nose colour,
 // eye colour, direction, any accessories, and a background
-public class Cat {
+public class Cat implements SaveData {
     private String name;                // the cat's name, if any
     private String base;                // the cat's current base colour
     private String pattern;             // the cat's current coat pattern
@@ -27,6 +32,19 @@ public class Cat {
         this.direction = new CatDirection();
         this.accessories = new Accessory();
         this.background = new Background();
+    }
+
+    // EFFECTS: creates a cat with name, base, pattern, nose, eyes, direction, accessories, background
+    public Cat(String name, String base, String pattern, String nose, String eyes,
+               CatDirection direction, Accessory accessories, Background background) {
+        this.name = name;
+        this.base = base;
+        this.pattern = pattern;
+        this.nose = nose;
+        this.eyes = eyes;
+        this.direction = direction;
+        this.accessories = accessories;
+        this.background = background;
     }
 
     // MODIFIES: this
@@ -118,16 +136,40 @@ public class Cat {
     // MODIFIES: this
     // EFFECTS: removes all accessories from a cat
     public void removeAllAccessories() {
-        this.accessories.removeAccessories();
+        this.accessories.removeAllAccessories();
     }
 
     // EFFECTS: if the cat has no accessories, returns "no accessories"
     //          otherwise, returns the cat's current accessories
     public String getAllAccessories() {
-        if (accessories.getAllAccessories().equals("")) {
+        ArrayList<String> accessoriesArray = accessories.getAllAccessories();
+        if (accessoriesArray.isEmpty()) {
             return "no accessories";
+        } else if (accessoriesArray.size() == 1) {
+            return addArticle(accessoriesArray.get(0));
         }
-        return this.accessories.getAllAccessories();
+        String accessoriesString = "";
+        int count;
+        for (count = 0; count < accessoriesArray.size() - 1; count++) {
+            accessoriesString += addArticle(accessoriesArray.get(count)) + ", ";
+        }
+        accessoriesString += "and " + addArticle(accessoriesArray.get(count));
+        return accessoriesString;
+    }
+
+    // EFFECTS: returns a word with its correct indefinite article
+    private String addArticle(String word) {
+        String firstLetter = word.substring(0, 1);
+        String lastLetter = word.substring(word.length() - 1);
+        String article = "a ";
+        if (firstLetter.equals("a") || firstLetter.equals("e") || firstLetter.equals("i")
+                || firstLetter.equals("o") || firstLetter.equals("u")) {
+            article = "an ";
+        }
+        if (lastLetter.equals("s")) {
+            article = "";
+        }
+        return article + word;
     }
 
     // MODIFIES: this
@@ -151,5 +193,43 @@ public class Cat {
     // EFFECTS: returns the cat's current background
     public String getBackground() {
         return this.background.getBackground();
+    }
+
+    @Override
+    public void save(PrintWriter printWriter) {
+        printWriter.print(name);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(base);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(pattern);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(nose);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(eyes);
+        printWriter.print(SaveDataReader.DELIMITER);
+        saveDirection(printWriter);
+        printWriter.print(SaveDataReader.DELIMITER);
+        saveAccessory(printWriter);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.println(background.getBackground());
+    }
+
+    private void saveDirection(PrintWriter printWriter) {
+        printWriter.print(direction.getFacing());
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(direction.getSide());
+    }
+
+    private void saveAccessory(PrintWriter printWriter) {
+        ArrayList<String> currentAccessories = accessories.getAllAccessories();
+        if (currentAccessories.isEmpty()) {
+            return;
+        }
+        int count;
+        for (count = 0; count < currentAccessories.size() - 1; count++) {
+            printWriter.print(currentAccessories.get(count));
+            printWriter.print(SaveDataReader.ACCESSORY_DELIMITER);
+        }
+        printWriter.print(currentAccessories.get(count));
     }
 }

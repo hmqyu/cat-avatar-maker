@@ -11,6 +11,15 @@ public class Accessory {
         accessories = new ArrayList<>();
     }
 
+    // EFFECTS: creates a list of accessories with accessories
+    public Accessory(ArrayList<String> accessories) {
+        if (!accessories.isEmpty() && accessories.get(0).equals("")) {
+            this.accessories = new ArrayList<>();
+        } else {
+            this.accessories = accessories;
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: if accessory is in accessories, returns false
     //          otherwise, adds it to accessories and returns true
@@ -26,24 +35,8 @@ public class Accessory {
     // EFFECTS: if accessories is empty, returns an empty string
     //          if accessories is a size of one, returns just that accessory
     //          if accessories is a size of two or more, returns accessories in the form of a string
-    public String getAllAccessories() {
-        int count;
-        String allAccessories = "";
-
-        if (accessories.isEmpty()) {
-            return allAccessories;
-        }
-
-        if (accessories.size() == 1) {
-            return accessories.get(0);
-        }
-
-        for (count = 0; count < (accessories.size() - 1); count++) {
-            allAccessories += accessories.get(count) + ", ";
-        }
-
-        allAccessories += "and " + accessories.get(count);
-        return allAccessories;
+    public ArrayList<String> getAllAccessories() {
+        return accessories;
     }
 
     // MODIFIES: this
@@ -55,7 +48,7 @@ public class Accessory {
 
     // MODIFIES: this
     // EFFECTS: clears accessories
-    public void removeAccessories() {
+    public void removeAllAccessories() {
         accessories.clear();
     }
 

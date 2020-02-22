@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BackgroundTest {
     private Background constructorBG;
+    private Background persistenceBG;
     private Background changingBG;
     private Background deleteBG;
     private Background noBG;
@@ -20,6 +21,8 @@ public class BackgroundTest {
         noBG = new Background();
         yesBG = new Background();
 
+        persistenceBG = new Background("nighttime");
+
         deleteBG.changeBackground("garden");
         yesBG.changeBackground("forest");
 
@@ -30,6 +33,11 @@ public class BackgroundTest {
         assertEquals("empty", constructorBG.getBackground());
         assertEquals("empty", changingBG.getBackground());
         assertEquals("empty", noBG.getBackground());
+    }
+
+    @Test
+    void testPersistenceConstructor() {
+        assertEquals("nighttime", persistenceBG.getBackground());
     }
 
     @Test

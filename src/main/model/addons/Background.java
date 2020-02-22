@@ -18,6 +18,11 @@ public class Background {
         this.background = EMPTY;
     }
 
+    // EFFECTS: creates a background with background
+    public Background(String background) {
+        this.background = background;
+    }
+
     // MODIFIES: this
     // EFFECTS: changes the current background to the given one if in BACKGROUNDS, and returns true
     //          otherwise, returns false

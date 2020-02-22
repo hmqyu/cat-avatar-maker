@@ -1,4 +1,29 @@
 package persistence;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+// Represents a writer that writes a cat's data to a file
+// Class is heavily inspired by the AccountNotRobust project (specifically the Writer class) given to us in CPSC 210
 public class SaveDataWriter {
+    private PrintWriter writer;
+
+    // EFFECTS: constructs a writer that can write a cat's data to file
+    public SaveDataWriter(File file) throws FileNotFoundException, UnsupportedEncodingException {
+        writer = new PrintWriter(file, "UTF-8");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes data to file
+    public void write(SaveData data) {
+        data.save(writer);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: closes the print writer
+    public void close() {
+        writer.close();
+    }
 }

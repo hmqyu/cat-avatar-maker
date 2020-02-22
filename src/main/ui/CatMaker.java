@@ -1,17 +1,25 @@
 package ui;
 
 import model.cat.Cat;
+import model.cat.CatCollection;
+import persistence.SaveDataReader;
+import persistence.SaveDataWriter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 // Cat Maker Application
 // Class is heavily inspired by the AccountNotRobust project (specifically the TellerApp class) given to us in CPSC 210
-
 public class CatMaker {
     private Scanner userInput;
     private boolean newCat = true;
     private Cat userCat;
     private String catName;
+    private static final String CAT_FILE = "./data/CatCollection.txt";
+    private CatCollection collection;
 
     // EFFECTS: runs the cat maker application
     public CatMaker() {
@@ -25,6 +33,8 @@ public class CatMaker {
         userInput = new Scanner(System.in);
         String userCommand;
         userCat = new Cat();
+
+        loadCollection();
 
         System.out.println("CAT MAKER");
         System.out.println("\nWelcome!");
@@ -57,8 +67,10 @@ public class CatMaker {
         System.out.println("\tdirection");
         System.out.println("\taccessories");
         System.out.println("\tbackground");
-        System.out.println("\n\tdescription");
-        System.out.println("\n\thelp");
+        System.out.println("\tdescription");
+        System.out.println("\n\tload");
+        System.out.println("\tsave");
+        System.out.println("\thelp");
         System.out.println("\tquit");
 
     }
@@ -84,10 +96,27 @@ public class CatMaker {
             backgroundCommand();
         } else if (input.equals("description")) {
             descriptionCommand();
-        } else if (input.equals("help")) {
-            helpCommand();
         } else {
-            System.out.println("ERROR: Invalid command.");
+            completeSystemCommand(input);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes the user's inputted, system-related commands
+    private void completeSystemCommand(String input) {
+        switch (input) {
+            case "load":
+                loadCommand();
+                break;
+            case "save":
+                saveCommand();
+                break;
+            case "help":
+                helpCommand();
+                break;
+            default:
+                System.out.println("ERROR: Invalid command.");
+                break;
         }
     }
 
@@ -96,7 +125,7 @@ public class CatMaker {
     //          otherwise, renames a cat
     private void nameCommand() {
         if (newCat) {
-            System.out.println("\nWhat would you like to name your cat?");
+            System.out.println("\nWhat would you like to name " + catName + "?");
             String name = userInput.next();
             userCat.changeName(name);
             System.out.println("\nYou named your cat " + name + "!");
@@ -355,6 +384,57 @@ public class CatMaker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads selected cat from CAT_FILE, if that file exists;
+    //          otherwise returns to the menu
+    private void loadCommand() {
+        try {
+            Cat currentCat;
+            collection = SaveDataReader.readCollection(new File(CAT_FILE));
+            System.out.println("All cats in the cat collection:");
+            for (int count = 0; count < collection.numOfItems(); count++) {
+                currentCat = collection.getCatFromCollection(count);
+                System.out.println((count + 1) + ". " + currentCat.getName());
+            }
+            System.out.println("\nPlease enter the number of the cat you wish to load "
+                    + "(enter 0 if you don't want to load a cat):");
+            int command = userInput.nextInt();
+            if (command == 0) {
+                System.out.println("No cat has been loaded.");
+            } else {
+                userCat = collection.getCatFromCollection(command - 1);
+                System.out.println("\n" + userCat.getName() + " has been loaded.");
+            }
+            System.out.println("Returning to the menu...");
+        } catch (IOException e) {
+            System.out.println("There are no cats to load.");
+            System.out.println("Returning to the menu...");
+        }
+    }
+
+    private void loadCollection() {
+        try {
+            collection = SaveDataReader.readCollection(new File(CAT_FILE));
+        } catch (IOException e) {
+            collection = new CatCollection();
+        }
+    }
+
+    // EFFECTS: saves current cat (userCat) to cat collection (CAT_FILE)
+    private void saveCommand() {
+        try {
+            SaveDataWriter writer = new SaveDataWriter(new File(CAT_FILE));
+            collection.addToCollection(userCat);
+            writer.write(collection);
+            writer.close();
+            System.out.println(catName + " has been saved to file " + CAT_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found - unable to save cat to " + CAT_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
     // EFFECTS: displays a description of the commands that can be used and stays there until the user inputs something
     private void helpCommand() {
         System.out.println("\nname: changes " + catName + "'s name.");
@@ -366,6 +446,8 @@ public class CatMaker {
         System.out.println("accessories: changes the accessories " + catName + " is currently wearing, if any.");
         System.out.println("background: changes " + catName + "'s current background.");
         System.out.println("description: gives a description of " + catName + "'s current appearance.");
+        System.out.println("load: loads a cat from your cat collection.");
+        System.out.println("save: saves " + catName + " to your cat collection.");
         System.out.println("quit: quits the cat maker application.");
         System.out.println("\nPlease type anything to continue...");
         String command = userInput.next();
