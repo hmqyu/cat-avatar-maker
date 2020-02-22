@@ -120,7 +120,7 @@ class CatTest {
         changeAccessoriesArticleCat.addAccessory("earring stud");
         changeAccessoriesArticleCat.addAccessory("ivory brooch");
         changeAccessoriesArticleCat.addAccessory("overcoat");
-        changeAccessoriesArticleCat.addAccessory("undercoat");
+        changeAccessoriesArticleCat.addAccessory("undershirt");
         changeAccessoriesArticleCat.addAccessory("wool sweater");
         changeAccessoriesArticleCat.addAccessory("glasses");
         assertEquals("an apron, an earring stud, an ivory brooch, an overcoat, an undershirt," +

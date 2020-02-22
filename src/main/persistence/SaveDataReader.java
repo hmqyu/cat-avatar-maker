@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SaveDataReader {
+public abstract class SaveDataReader {
     public static final String DELIMITER = ",";
     public static final String ACCESSORY_DELIMITER = "&";
 

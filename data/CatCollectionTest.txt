@@ -1,0 +1,3 @@
+Heeny,red,tabby,pink,copper,backward,right,bag&amulet&wings,nighttime
+Holly,brown,tabby,black,green,forward,left,,city
+your cat,white,solid,pink,yellow,forward,right,,empty
