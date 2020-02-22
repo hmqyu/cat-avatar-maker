@@ -6,10 +6,23 @@ import java.io.File;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SaveDataReaderTest {
+    SaveDataReader dummyJacoco;
+
+    @BeforeEach
+    void runBefore() {
+        dummyJacoco = new SaveDataReader();
+    }
+
+    @Test
+    void testDummyConstructor() {
+        assertEquals("dummy jacoco!", dummyJacoco.getSaveDataReaderValue());
+    }
+
     @Test
     void testParseSingleCatCollection() {
         try {
