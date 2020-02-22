@@ -18,7 +18,7 @@ public class CatMaker {
     private boolean newCat = true;
     private Cat userCat;
     private String catName;
-    private static final String CAT_FILE = "./data/CatCollection.txt";
+    private static final String CAT_COLLECTION = "./data/CatCollection.txt";
     private CatCollection collection;
 
     // EFFECTS: runs the cat maker application
@@ -54,6 +54,17 @@ public class CatMaker {
         }
 
         System.out.println("\nThanks for playing!");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads collection from CAT_COLLECTION, if the file exists
+    //          otherwise, creates a new CatCollection as collection
+    private void loadCollection() {
+        try {
+            collection = SaveDataReader.readCollection(new File(CAT_COLLECTION));
+        } catch (IOException e) {
+            collection = new CatCollection();
+        }
     }
 
     // EFFECTS: displays the commands a user can input
@@ -390,9 +401,9 @@ public class CatMaker {
     private void loadCommand() {
         try {
             Cat currentCat;
-            collection = SaveDataReader.readCollection(new File(CAT_FILE));
+            collection = SaveDataReader.readCollection(new File(CAT_COLLECTION));
             System.out.println("All cats in the cat collection:");
-            for (int count = 0; count < collection.numOfItems(); count++) {
+            for (int count = 0; count < collection.numOfCats(); count++) {
                 currentCat = collection.getCatFromCollection(count);
                 System.out.println((count + 1) + ". " + currentCat.getName());
             }
@@ -412,24 +423,16 @@ public class CatMaker {
         }
     }
 
-    private void loadCollection() {
-        try {
-            collection = SaveDataReader.readCollection(new File(CAT_FILE));
-        } catch (IOException e) {
-            collection = new CatCollection();
-        }
-    }
-
-    // EFFECTS: saves current cat (userCat) to cat collection (CAT_FILE)
+    // EFFECTS: adds the current cat (userCat) to collection, which is saved to CAT_COLLECTION
     private void saveCommand() {
         try {
-            SaveDataWriter writer = new SaveDataWriter(new File(CAT_FILE));
+            SaveDataWriter writer = new SaveDataWriter(new File(CAT_COLLECTION));
             collection.addToCollection(userCat);
             writer.write(collection);
             writer.close();
-            System.out.println(catName + " has been saved to file " + CAT_FILE);
+            System.out.println(catName + " has been saved to file " + CAT_COLLECTION);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found - unable to save cat to " + CAT_FILE);
+            System.out.println("File not found - unable to save cat to " + CAT_COLLECTION);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

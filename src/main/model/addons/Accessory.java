@@ -11,7 +11,8 @@ public class Accessory {
         accessories = new ArrayList<>();
     }
 
-    // EFFECTS: creates a list of accessories with accessories
+    // EFFECTS: creates a list of accessories from accessories
+    //          if accessories is empty or has "", a new list of accessories is created
     public Accessory(ArrayList<String> accessories) {
         if (accessories.isEmpty()) {
             this.accessories = new ArrayList<>();
@@ -34,9 +35,7 @@ public class Accessory {
         return true;
     }
 
-    // EFFECTS: if accessories is empty, returns an empty string
-    //          if accessories is a size of one, returns just that accessory
-    //          if accessories is a size of two or more, returns accessories in the form of a string
+    // EFFECTS: returns accessories
     public ArrayList<String> getAllAccessories() {
         return accessories;
     }

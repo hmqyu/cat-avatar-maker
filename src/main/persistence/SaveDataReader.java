@@ -13,25 +13,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class SaveDataReader {
-    public static final String DELIMITER = ",";
-    public static final String ACCESSORY_DELIMITER = "&";
+// Represents a reader that can read a collection and its cats from a file
+public class SaveDataReader {
+    public static final String DELIMITER = ",";             // represents a delimiter to separate cat fields
+    public static final String ACCESSORY_DELIMITER = "&";   // represents a delimiter to separate accessories
 
-    // EFFECTS: returns a list of accounts parsed from file; throws
-    // IOException if an exception is raised when opening / reading from file
+    // EFFECTS: returns a CatCollection parsed from file
+    //          IOException is thrown if an exception occurs when opening/reading file
     public static CatCollection readCollection(File file) throws IOException {
-        List<String> catFile = readFile(file);
-        return new CatCollection(parseData(catFile));
+        List<String> collectionFile = readFile(file);
+        return new CatCollection(parseData(collectionFile));
     }
 
-    // EFFECTS: returns content of file as a list of strings, each string
-    // containing the content of one row of the file
+    // EFFECTS: returns data from file as a list of String
+    //          each String represents the data of a row in file
     private static List<String> readFile(File file) throws IOException {
         return Files.readAllLines(file.toPath());
     }
 
-    // EFFECTS: returns a list of accounts parsed from list of strings
-    // where each string contains data for one account
+    // EFFECTS: returns a list of Cat parsed from a list of String
+    //          each String represents the data for a Cat
     private static ArrayList<Cat> parseData(List<String> file) {
         ArrayList<Cat> cats = new ArrayList<>();
 
@@ -43,17 +44,23 @@ public abstract class SaveDataReader {
         return cats;
     }
 
-    // EFFECTS: returns a list of strings obtained by splitting line on delimiter
-    public static ArrayList<String> splitter(String line, String delimiter) {
-        String[] lineSplit = line.split(delimiter);
+    // EFFECTS: returns list of string retrieved by splitting row apart at delimiter
+    public static ArrayList<String> splitter(String row, String delimiter) {
+        String[] lineSplit = row.split(delimiter);
         return new ArrayList<>(Arrays.asList(lineSplit));
     }
 
-    // REQUIRES: components has size 4 where element 0 represents the
-    // id of the next account to be constructed, element 1 represents
-    // the id, elements 2 represents the name and element 3 represents
-    // the balance of the account to be constructed
-    // EFFECTS: returns an account constructed from components
+    // REQUIRES: fields has size 9
+    //           element 0 represents a cat's name
+    //           element 1 represents a cat's base colour
+    //           element 2 represents a cat's coat pattern
+    //           element 3 represents a cat's nose colour
+    //           element 4 represents a cat's eye colour
+    //           element 5 represents where the cat is facing
+    //           element 6 represents which side the cat is looking at
+    //           element 7 represents a cat's accessories (if any)
+    //           element 8 represents a cat's background (if any)
+    // EFFECTS: returns a Cat created from the data in fields
     private static Cat parseCat(List<String> fields) {
         String name = fields.get(0);
         String base = fields.get(1);

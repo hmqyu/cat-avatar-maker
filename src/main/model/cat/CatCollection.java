@@ -5,15 +5,16 @@ import persistence.SaveData;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-// Represents a collection of cats that have been made
+// Represents a collection of cats that have been saved
 public class CatCollection implements SaveData {
-    ArrayList<Cat> collection;
+    private ArrayList<Cat> collection;   // a list of cats that have been saved
 
     // EFFECTS: creates a collection to store cat information
     public CatCollection() {
         collection = new ArrayList<>();
     }
 
+    // EFFECTS: creates a collection from a given list of Cat
     public CatCollection(ArrayList<Cat> collection) {
         this.collection = collection;
     }
@@ -24,13 +25,13 @@ public class CatCollection implements SaveData {
         collection.add(cat);
     }
 
-    // EFFECTS: returns the number of items in collection
-    public int numOfItems() {
+    // EFFECTS: returns the number of Cats in collection
+    public int numOfCats() {
         return collection.size();
     }
 
     // REQUIRES: num < collection.size()
-    // EFFECTS: returns cat at given index in collection
+    // EFFECTS: returns the Cat at given index in collection
     public Cat getCatFromCollection(int num) {
         return collection.get(num);
     }
@@ -40,6 +41,7 @@ public class CatCollection implements SaveData {
         return collection;
     }
 
+    // EFFECTS: saves each cat in collection to a file
     @Override
     public void save(PrintWriter printWriter) {
         for (Cat cat : collection) {

@@ -17,7 +17,7 @@ public class Cat implements SaveData {
     private String nose;                // the cat's current nose colour
     private String eyes;                // the cat's current eye colour
     private CatDirection direction;     // the cat's current direction (where it's facing and turned to)
-    private Accessory accessories;   // the cat's current accessories
+    private Accessory accessories;      // the cat's current accessories
     private Background background;      // the cat's current background
 
     // EFFECTS: creates a cat with no name (ie. "your cat") that is set to have
@@ -157,7 +157,7 @@ public class Cat implements SaveData {
         return accessoriesString;
     }
 
-    // EFFECTS: returns a word with its correct indefinite article
+    // EFFECTS: returns word with its correct indefinite article
     private String addArticle(String word) {
         String firstLetter = word.substring(0, 1);
         String lastLetter = word.substring(word.length() - 1);
@@ -173,7 +173,7 @@ public class Cat implements SaveData {
     }
 
     // MODIFIES: this
-    // EFFECTS: if available, changes the background of a cat and returns true
+    // EFFECTS: if background is available, changes the background of a cat and returns true
     //          otherwise, returns false
     public boolean changeBackground(String background) {
         return this.background.changeBackground(background);
@@ -195,6 +195,7 @@ public class Cat implements SaveData {
         return this.background.getBackground();
     }
 
+    // EFFECTS: saves all of a cat's fields to a file
     @Override
     public void save(PrintWriter printWriter) {
         printWriter.print(name);
@@ -214,12 +215,14 @@ public class Cat implements SaveData {
         printWriter.println(background.getBackground());
     }
 
+    // EFFECTS: saves a cat's direction to a file
     private void saveDirection(PrintWriter printWriter) {
         printWriter.print(direction.getFacing());
         printWriter.print(SaveDataReader.DELIMITER);
         printWriter.print(direction.getSide());
     }
 
+    // EFFECTS: saves all of a cat's accessories (if any) to a file
     private void saveAccessory(PrintWriter printWriter) {
         ArrayList<String> currentAccessories = accessories.getAllAccessories();
         if (currentAccessories.isEmpty()) {

@@ -8,9 +8,9 @@ import java.io.UnsupportedEncodingException;
 // Represents a writer that writes a cat's data to a file
 // Class is heavily inspired by the AccountNotRobust project (specifically the Writer class) given to us in CPSC 210
 public class SaveDataWriter {
-    private PrintWriter writer;
+    private PrintWriter writer;   // a general writer
 
-    // EFFECTS: constructs a writer that can write a cat's data to file
+    // EFFECTS: constructs a writer that can write a collection of cats and/or a cat's data to file
     public SaveDataWriter(File file) throws FileNotFoundException, UnsupportedEncodingException {
         writer = new PrintWriter(file, "UTF-8");
     }
