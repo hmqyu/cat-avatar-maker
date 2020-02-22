@@ -13,7 +13,9 @@ public class Accessory {
 
     // EFFECTS: creates a list of accessories with accessories
     public Accessory(ArrayList<String> accessories) {
-        if (!accessories.isEmpty() && accessories.get(0).equals("")) {
+        if (accessories.isEmpty()) {
+            this.accessories = new ArrayList<>();
+        } else if (accessories.get(0).equals("")) {
             this.accessories = new ArrayList<>();
         } else {
             this.accessories = accessories;

@@ -10,8 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AccessoryTest {
 
     private Accessory constructorCA;
-    private Accessory persistenceCA;
-    private Accessory persistenceEmptyCA;
+    private Accessory persistenceEmptyListCA;
+    private Accessory persistenceEmptyStringCA;
+    private Accessory persistenceFilledCA;
     private Accessory oneItemCA;
     private Accessory multiItemCA;
     private Accessory filledCA;
@@ -25,15 +26,18 @@ public class AccessoryTest {
         filledCA = new Accessory();
         removeCA = new Accessory();
 
+        ArrayList<String> emptyList = new ArrayList<>();
+        persistenceEmptyListCA = new Accessory(emptyList);
+
+        ArrayList<String> emptyString = new ArrayList<>();
+        emptyString.add("");
+        persistenceEmptyStringCA = new Accessory(emptyString);
+
         ArrayList<String> accessories = new ArrayList<>();
         accessories.add("hat");
         accessories.add("scarf");
         accessories.add("horns");
-        persistenceCA = new Accessory(accessories);
-
-        ArrayList<String> emptyAccessories = new ArrayList<>();
-        emptyAccessories.add("");
-        persistenceEmptyCA = new Accessory(emptyAccessories);
+        persistenceFilledCA = new Accessory(accessories);
 
         filledCA.addAccessory("hat");
         filledCA.addAccessory("scarf");
@@ -55,13 +59,14 @@ public class AccessoryTest {
 
     @Test
     void testPersistenceConstructor() {
+        assertEquals(new ArrayList<>(), persistenceEmptyListCA.getAllAccessories());
+        assertEquals(new ArrayList<>(), persistenceEmptyStringCA.getAllAccessories());
+
         ArrayList<String> persistenceTest = new ArrayList<>();
         persistenceTest.add("hat");
         persistenceTest.add("scarf");
         persistenceTest.add("horns");
-        assertEquals(persistenceTest, persistenceCA.getAllAccessories());
-
-        assertEquals(new ArrayList<>(), persistenceEmptyCA.getAllAccessories());
+        assertEquals(persistenceTest, persistenceFilledCA.getAllAccessories());
     }
 
     @Test

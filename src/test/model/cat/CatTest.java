@@ -12,6 +12,7 @@ class CatTest {
     private Cat persistenceCat;
     private Cat changeDirectionCat;
     private Cat changeAccessoriesCat;
+    private Cat changeAccessoriesArticleCat;
     private Cat changeBackgroundCat;
     private Cat changeMultipleCat;
 
@@ -20,6 +21,7 @@ class CatTest {
         constructorCat = new Cat();
         changeDirectionCat = new Cat();
         changeAccessoriesCat = new Cat();
+        changeAccessoriesArticleCat = new Cat();
         changeBackgroundCat = new Cat();
 
         persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper",
@@ -112,6 +114,17 @@ class CatTest {
         assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
         constructorCat.removeAllAccessories();
         assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
+
+        // testing addArticle
+        changeAccessoriesArticleCat.addAccessory("apron");
+        changeAccessoriesArticleCat.addAccessory("earring stud");
+        changeAccessoriesArticleCat.addAccessory("ivory brooch");
+        changeAccessoriesArticleCat.addAccessory("overcoat");
+        changeAccessoriesArticleCat.addAccessory("undercoat");
+        changeAccessoriesArticleCat.addAccessory("wool sweater");
+        changeAccessoriesArticleCat.addAccessory("glasses");
+        assertEquals("an apron, an earring stud, an ivory brooch, an overcoat, an undershirt," +
+                " a wool sweater, and glasses", changeAccessoriesArticleCat.getAllAccessories());
     }
 
     @Test
