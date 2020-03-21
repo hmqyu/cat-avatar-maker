@@ -13,7 +13,7 @@ customizable - in fact, you can customize anything and everything possible, incl
 This app is aimed at the general public, with a specific emphasis on those who like cats and
 avatar makers in general. I have a lot of friends in the artist community that use avatar 
 makers, so I know there's a population out there that would appreciate this app. I personally
-*love* creating pixel art and programming, so I also thought this would be a good way to 
+*love* creating pixel art and programming, so I also thought this would be a good way to  
 demonstrate both of my skills (while also showing my love for cats!).
 
 ## User Stories

@@ -1,2 +1,3 @@
-Al,white,solid,pink,yellow,forward,right,,empty
-Six,white,solid,pink,yellow,forward,right,,empty
+six,red,solid,pink,green,forward,right,,empty
+Al,red,solid,pink,green,forward,right,,empty
+six,red,solid,pink,green,forward,right,,empty
