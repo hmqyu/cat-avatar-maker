@@ -2,14 +2,14 @@ package model.addons;
 
 // Represents different available backgrounds
 public class Background {
-    private static final String EMPTY = "empty";           // no background
-    private static final String BEACH = "beach";           // beach background
-    private static final String CITY = "city";             // city background
-    private static final String FOREST = "forest";         // forest background
-    private static final String GARDEN = "garden";         // garden background
-    private static final String NIGHTTIME = "nighttime";   // nighttime background
+    private static final String EMPTY = "Empty";           // no background
+    private static final String SOLID = "Solid";           // beach background
+    private static final String HOME = "Home";             // city background
+    private static final String FOREST = "Forest";         // forest background
+    private static final String BEACH = "Beach";         // garden background
+    private static final String NIGHTTIME = "Nighttime";   // nighttime background
 
-    private static final String[] BACKGROUNDS = {BEACH, CITY, FOREST, GARDEN, NIGHTTIME};   // all usable backgrounds
+    private static final String[] BACKGROUNDS = {EMPTY, SOLID, HOME, FOREST, BEACH, NIGHTTIME};// all usable backgrounds
 
     private String background;   // the current background
 

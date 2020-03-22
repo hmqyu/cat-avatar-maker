@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HelpPanel {
-    public static final int WIDTH = 650;
+    public static final int WIDTH = 700;
     public static final int HEIGHT = 500;
 
     private Stage currentStage;
@@ -21,7 +21,7 @@ public class HelpPanel {
     public HelpPanel(Stage stage) {
         helpScreen = new StackPane();
         // Background code from: https://stackoverflow.com/questions/9738146/javafx-how-to-set-scene-background-image
-        BackgroundImage helpScreenBackground = new BackgroundImage(new Image("ui/images/HelpScreen.png"),
+        BackgroundImage helpScreenBackground = new BackgroundImage(new Image("ui/images/system/HelpScreen.png"),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         loadBackButton();
@@ -40,10 +40,10 @@ public class HelpPanel {
 
     private void makeBackButton() {
         ImageView quitButtonImage = new ImageView();
-        quitButtonImage.setImage(new Image("ui/images/BackButton.png"));
+        quitButtonImage.setImage(new Image("ui/images/system/BackButton.png"));
         backButton = new Button("", quitButtonImage);
         backButton.setStyle("-fx-background-color: transparent;");
-        backButton.setOnAction(event -> new TitlePanel(currentStage));
+        backButton.setOnAction(event -> new MenuPanel(currentStage));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,

@@ -10,8 +10,8 @@ public class CatMaker extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Cat Avatar Maker - Create Your Own Cat!");
-        stage.getIcons().add(new Image("ui/images/CatAvatarMakerIcon.png"));
-        TitlePanel title = new TitlePanel(stage);
+        stage.getIcons().add(new Image("ui/images/system/CatAvatarMakerIcon.png"));
+        MenuPanel title = new MenuPanel(stage);
     }
 
     public static void main(String[] args) {

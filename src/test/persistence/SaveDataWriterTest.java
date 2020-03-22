@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SaveDataWriterTest {
     private static final String FILE_TESTER = "./data/CatCollectionTest.txt";
     private ArrayList<Cat> catArrayListTester = new ArrayList<>();
-    private Cat catArrayTester1 = new Cat("Heeny", "red", "tabby", "pink", "copper",
+    private Cat catArrayTester1 = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
             new CatDirection("backward", "right"), new Accessory(),
             new Background("nighttime"));
-    private Cat catArrayTester2 = new Cat("Holly", "brown", "tabby", "black", "green",
+    private Cat catArrayTester2 = new Cat("Holly", "brown", "tabby", "black", "green", "green",
             new CatDirection("forward", "left"), new Accessory(),
             new Background("city"));
 
@@ -57,8 +57,8 @@ public class SaveDataWriterTest {
             assertEquals("Heeny", heeny.getName());
             assertEquals("red", heeny.getBase());
             assertEquals("tabby", heeny.getPattern());
-            assertEquals("pink", heeny.getNose());
-            assertEquals("copper", heeny.getEyes());
+            assertEquals("pink", heeny.getSkin());
+            assertEquals("copper", heeny.getLeftEye());
             assertEquals("backward and to the right", heeny.getDirection());
             assertEquals("a bag, an amulet, and wings", heeny.getAllAccessories());
             assertEquals("nighttime", heeny.getBackground());
@@ -67,21 +67,21 @@ public class SaveDataWriterTest {
             assertEquals("Holly", holly.getName());
             assertEquals("brown", holly.getBase());
             assertEquals("tabby", holly.getPattern());
-            assertEquals("black", holly.getNose());
-            assertEquals("green", holly.getEyes());
+            assertEquals("black", holly.getSkin());
+            assertEquals("green", holly.getLeftEye());
             assertEquals("forward and to the left", holly.getDirection());
             assertEquals("no accessories", holly.getAllAccessories());
             assertEquals("city", holly.getBackground());
 
             Cat yourCat = collection.getCatFromCollection(2);
             assertEquals("your cat", yourCat.getName());
-            assertEquals("white", yourCat.getBase());
-            assertEquals("solid", yourCat.getPattern());
-            assertEquals("pink", yourCat.getNose());
-            assertEquals("yellow", yourCat.getEyes());
+            assertEquals("White", yourCat.getBase());
+            assertEquals("Solid", yourCat.getPattern());
+            assertEquals("Pink", yourCat.getSkin());
+            assertEquals("Yellow", yourCat.getLeftEye());
             assertEquals("forward and to the right", yourCat.getDirection());
             assertEquals("no accessories", yourCat.getAllAccessories());
-            assertEquals("empty", yourCat.getBackground());
+            assertEquals("Empty", yourCat.getBackground());
         } catch (IOException e) {
             fail("IOException shouldn't be thrown.");
         }

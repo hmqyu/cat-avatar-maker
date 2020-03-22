@@ -1,3 +1,4 @@
+package ui.old;/*
 package ui.old;
 
 public class Main {
@@ -5,3 +6,4 @@ public class Main {
         new OldCatMaker();
     }
 }
+*/

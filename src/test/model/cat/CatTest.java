@@ -24,7 +24,7 @@ class CatTest {
         changeAccessoriesArticleCat = new Cat();
         changeBackgroundCat = new Cat();
 
-        persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper",
+        persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
                 new CatDirection("backward", "right"), new Accessory(),
                 new Background("nighttime"));
 
@@ -32,20 +32,22 @@ class CatTest {
         changeMultipleCat.changeName("Al");
         changeMultipleCat.changeBase("red");
         changeMultipleCat.changePattern("calico");
-        changeMultipleCat.changeNose("mauve");
-        changeMultipleCat.changeEyes("green");
+        changeMultipleCat.changeSkin("mauve");
+        changeMultipleCat.changeLeftEye("green");
+        changeMultipleCat.changeRightEye("green");
     }
 
     @Test
     void testConstructor() {
         assertEquals("your cat", constructorCat.getName());
-        assertEquals("white", constructorCat.getBase());
-        assertEquals("solid", constructorCat.getPattern());
-        assertEquals("pink", constructorCat.getNose());
-        assertEquals("yellow", constructorCat.getEyes());
+        assertEquals("White", constructorCat.getBase());
+        assertEquals("Solid", constructorCat.getPattern());
+        assertEquals("Pink", constructorCat.getSkin());
+        assertEquals("Yellow", constructorCat.getLeftEye());
+        assertEquals("Yellow", constructorCat.getRightEye());
         assertEquals("forward and to the right", constructorCat.getDirection());
         assertEquals("no accessories", constructorCat.getAllAccessories());
-        assertEquals("empty", constructorCat.getBackground());
+        assertEquals("Empty", constructorCat.getBackground());
     }
 
     @Test
@@ -53,8 +55,9 @@ class CatTest {
         assertEquals("Heeny", persistenceCat.getName());
         assertEquals("red", persistenceCat.getBase());
         assertEquals("tabby", persistenceCat.getPattern());
-        assertEquals("pink", persistenceCat.getNose());
-        assertEquals("copper", persistenceCat.getEyes());
+        assertEquals("pink", persistenceCat.getSkin());
+        assertEquals("copper", persistenceCat.getLeftEye());
+        assertEquals("copper", persistenceCat.getRightEye());
         assertEquals("backward and to the right", persistenceCat.getDirection());
         assertEquals("no accessories", persistenceCat.getAllAccessories());
         assertEquals("nighttime", persistenceCat.getBackground());
@@ -65,8 +68,8 @@ class CatTest {
         assertEquals("Al", changeMultipleCat.getName());
         assertEquals("red", changeMultipleCat.getBase());
         assertEquals("calico", changeMultipleCat.getPattern());
-        assertEquals("mauve", changeMultipleCat.getNose());
-        assertEquals("green", changeMultipleCat.getEyes());
+        assertEquals("mauve", changeMultipleCat.getSkin());
+        assertEquals("green", changeMultipleCat.getLeftEye());
     }
 
     @Test
@@ -131,16 +134,16 @@ class CatTest {
     void testBackground() {
         assertTrue(changeBackgroundCat.emptyBackground());
 
-        assertTrue(changeBackgroundCat.changeBackground("forest"));
-        assertEquals("forest", changeBackgroundCat.getBackground());
+        assertTrue(changeBackgroundCat.changeBackground("Forest"));
+        assertEquals("Forest", changeBackgroundCat.getBackground());
         assertFalse(changeBackgroundCat.emptyBackground());
 
-        assertTrue(changeBackgroundCat.changeBackground("nighttime"));
-        assertEquals("nighttime", changeBackgroundCat.getBackground());
+        assertTrue(changeBackgroundCat.changeBackground("Nighttime"));
+        assertEquals("Nighttime", changeBackgroundCat.getBackground());
         assertFalse(changeBackgroundCat.emptyBackground());
 
         changeBackgroundCat.removeBackground();
-        assertEquals("empty", changeBackgroundCat.getBackground());
+        assertEquals("Empty", changeBackgroundCat.getBackground());
         assertTrue(changeBackgroundCat.emptyBackground());
     }
 

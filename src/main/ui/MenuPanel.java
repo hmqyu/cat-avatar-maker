@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,51 +12,54 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.cat.Cat;
 import model.cat.CatCollection;
 import persistence.SaveDataReader;
 
 import java.io.File;
 import java.io.IOException;
 
-public class TitlePanel {
-    public static final int WIDTH = 650;
+public class MenuPanel {
+    public static final int WIDTH = 700;
     public static final int HEIGHT = 500;
 
     private static final String CAT_COLLECTION = "./data/CatCollection.txt";
     private CatCollection collection;
+    private Cat userCat;
 
     private Stage currentStage;
-    private StackPane titleScreen;
+    private StackPane menuScreen;
     private Button newButton;
     private Button loadButton;
     private Button helpButton;
     private Button quitButton;
 
-    public TitlePanel(Stage stage) {
-        titleScreen = new StackPane();
-        loadTitleButtons();
-        titleScreen.setStyle("-fx-background-color: #f5efed");
+    public MenuPanel(Stage stage) {
+        userCat = new Cat();
+        menuScreen = new StackPane();
+        loadMenuButtons();
+        menuScreen.setStyle("-fx-background-color: #f5efed");
         currentStage = stage;
-        currentStage.setScene(new Scene(titleScreen, WIDTH, HEIGHT));
+        currentStage.setScene(new Scene(menuScreen, WIDTH, HEIGHT));
         currentStage.show();
     }
 
-    private void loadTitleButtons() {
+    private void loadMenuButtons() {
         makeNewButton();
         makeLoadButton();
         makeHelpButton();
         makeQuitButton();
         ImageView title = new ImageView();
-        title.setImage(new Image("ui/images/CatAvatarMakerTitle.png"));
-        setPositions(newButton, loadButton, helpButton, quitButton, title);
+        title.setImage(new Image("ui/images/system/CatAvatarMakerTitle.png"));
+        setPositions(title);
     }
 
     private void makeNewButton() {
         ImageView newButtonImage = new ImageView();
-        newButtonImage.setImage(new Image("ui/images/NewButton.png"));
+        newButtonImage.setImage(new Image("ui/images/system/NewButton.png"));
         newButton = new Button("", newButtonImage);
         newButton.setStyle("-fx-background-color: transparent;");
-        newButton.setOnAction(event -> System.out.println("Creating new cat!"));
+        newButton.setOnAction(event -> new MakerPanel(currentStage, userCat));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         newButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -68,7 +70,7 @@ public class TitlePanel {
 
     private void makeLoadButton() {
         ImageView loadButtonImage = new ImageView();
-        loadButtonImage.setImage(new Image("ui/images/LoadButton.png"));
+        loadButtonImage.setImage(new Image("ui/images/system/LoadButton.png"));
         loadButton = new Button("", loadButtonImage);
         loadButton.setStyle("-fx-background-color: transparent;");
         loadButton.setOnAction(event -> loadCollection());
@@ -82,7 +84,7 @@ public class TitlePanel {
 
     private void makeHelpButton() {
         ImageView helpButtonImage = new ImageView();
-        helpButtonImage.setImage(new Image("ui/images/HelpButton.png"));
+        helpButtonImage.setImage(new Image("ui/images/system/HelpButton.png"));
         helpButton = new Button("", helpButtonImage);
         helpButton.setStyle("-fx-background-color: transparent;");
         helpButton.setOnAction(event -> new HelpPanel(currentStage));
@@ -96,10 +98,10 @@ public class TitlePanel {
 
     private void makeQuitButton() {
         ImageView quitButtonImage = new ImageView();
-        quitButtonImage.setImage(new Image("ui/images/QuitButton.png"));
+        quitButtonImage.setImage(new Image("ui/images/system/QuitButton.png"));
         quitButton = new Button("", quitButtonImage);
         quitButton.setStyle("-fx-background-color: transparent;");
-        quitButton.setOnAction(event -> quitCatMaker());
+        quitButton.setOnAction(event -> System.exit(0));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         quitButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -108,20 +110,15 @@ public class TitlePanel {
                 event -> quitButton.setEffect(null));
     }
 
-    private void setPositions(Button btn1, Button btn2, Button btn3, Button btn4, ImageView title) {
+    private void setPositions(ImageView title) {
         VBox buttonBox = new VBox();
-        buttonBox.getChildren().addAll(btn1, btn2, btn3, btn4);
+        buttonBox.getChildren().addAll(newButton, loadButton, helpButton, quitButton);
         buttonBox.setAlignment(Pos.CENTER);
         VBox titleBox = new VBox(20);
         titleBox.setPadding(new Insets(50, 0, 0, 0));
         titleBox.getChildren().addAll(title, buttonBox);
         titleBox.setAlignment(Pos.TOP_CENTER);
-        titleScreen.getChildren().add(titleBox);
-    }
-
-    private void quitCatMaker() {
-        Platform.exit();
-        System.exit(0);
+        menuScreen.getChildren().add(titleBox);
     }
 
     private void loadCollection() {

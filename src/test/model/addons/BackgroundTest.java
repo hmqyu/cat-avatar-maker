@@ -21,46 +21,46 @@ public class BackgroundTest {
         noBG = new Background();
         yesBG = new Background();
 
-        persistenceBG = new Background("nighttime");
+        persistenceBG = new Background("Nighttime");
 
-        deleteBG.changeBackground("garden");
-        yesBG.changeBackground("forest");
+        deleteBG.changeBackground("Home");
+        yesBG.changeBackground("Forest");
 
     }
 
     @Test
     void testConstructor() {
-        assertEquals("empty", constructorBG.getBackground());
-        assertEquals("empty", changingBG.getBackground());
-        assertEquals("empty", noBG.getBackground());
+        assertEquals("Empty", constructorBG.getBackground());
+        assertEquals("Empty", changingBG.getBackground());
+        assertEquals("Empty", noBG.getBackground());
     }
 
     @Test
     void testPersistenceConstructor() {
-        assertEquals("nighttime", persistenceBG.getBackground());
+        assertEquals("Nighttime", persistenceBG.getBackground());
     }
 
     @Test
     void testChangingBackground() {
-        assertTrue(changingBG.changeBackground("beach"));
-        assertTrue(changingBG.changeBackground("city"));
-        assertTrue(changingBG.changeBackground("forest"));
-        assertTrue(changingBG.changeBackground("garden"));
-        assertTrue(changingBG.changeBackground("nighttime"));
+        assertTrue(changingBG.changeBackground("Beach"));
+        assertTrue(changingBG.changeBackground("Solid"));
+        assertTrue(changingBG.changeBackground("Forest"));
+        assertTrue(changingBG.changeBackground("Home"));
+        assertTrue(changingBG.changeBackground("Nighttime"));
 
         assertFalse(changingBG.changeBackground("empty"));
-        assertFalse(changingBG.changeBackground("volcano"));
-        assertFalse(changingBG.changeBackground("beac"));
-        assertFalse(changingBG.changeBackground("Forest"));
+        assertFalse(changingBG.changeBackground("Volcano"));
+        assertFalse(changingBG.changeBackground("Beac"));
+        assertFalse(changingBG.changeBackground("forest"));
     }
 
     @Test
     void testDeleteBackground() {
         deleteBG.deleteBackground();
-        assertEquals("empty", deleteBG.getBackground());
+        assertEquals("Empty", deleteBG.getBackground());
 
         noBG.deleteBackground();
-        assertEquals("empty", noBG.getBackground());
+        assertEquals("Empty", noBG.getBackground());
     }
 
     @Test

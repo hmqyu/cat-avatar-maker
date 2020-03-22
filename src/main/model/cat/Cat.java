@@ -14,8 +14,9 @@ public class Cat implements SaveData {
     private String name;                // the cat's name, if any
     private String base;                // the cat's current base colour
     private String pattern;             // the cat's current coat pattern
-    private String nose;                // the cat's current nose colour
-    private String eyes;                // the cat's current eye colour
+    private String skin;                // the cat's current nose colour
+    private String leftEye;             // the cat's current left eye colour
+    private String rightEye;            // the cat's current right eye colour
     private CatDirection direction;     // the cat's current direction (where it's facing and turned to)
     private Accessory accessories;      // the cat's current accessories
     private Background background;      // the cat's current background
@@ -25,23 +26,25 @@ public class Cat implements SaveData {
     //          to the right as its direction, no accessories, and no background
     public Cat() {
         this.name = "your cat";
-        this.base = "white";
-        this.pattern = "solid";
-        this.nose = "pink";
-        this.eyes = "yellow";
+        this.base = "White";
+        this.pattern = "Solid";
+        this.skin = "Pink";
+        this.leftEye = "Yellow";
+        this.rightEye = "Yellow";
         this.direction = new CatDirection();
         this.accessories = new Accessory();
         this.background = new Background();
     }
 
     // EFFECTS: creates a cat with name, base, pattern, nose, eyes, direction, accessories, background
-    public Cat(String name, String base, String pattern, String nose, String eyes,
+    public Cat(String name, String base, String pattern, String skin, String leftEye, String rightEye,
                CatDirection direction, Accessory accessories, Background background) {
         this.name = name;
         this.base = base;
         this.pattern = pattern;
-        this.nose = nose;
-        this.eyes = eyes;
+        this.skin = skin;
+        this.leftEye = leftEye;
+        this.rightEye = rightEye;
         this.direction = direction;
         this.accessories = accessories;
         this.background = background;
@@ -82,24 +85,35 @@ public class Cat implements SaveData {
 
     // MODIFIES: this
     // EFFECTS: changes the nose colour of a cat to nose
-    public void changeNose(String nose) {
-        this.nose = nose;
+    public void changeSkin(String skin) {
+        this.skin = skin;
     }
 
     // EFFECTS: returns the cat's current nose colour
-    public String getNose() {
-        return this.nose;
+    public String getSkin() {
+        return this.skin;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the eye colour of a cat to eyes
-    public void changeEyes(String eyes) {
-        this.eyes = eyes;
+    public void changeLeftEye(String leftEye) {
+        this.leftEye = leftEye;
     }
 
     // EFFECTS: returns the cat's current eye colour
-    public String getEyes() {
-        return this.eyes;
+    public String getLeftEye() {
+        return this.leftEye;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes the eye colour of a cat to eyes
+    public void changeRightEye(String rightEye) {
+        this.rightEye = rightEye;
+    }
+
+    // EFFECTS: returns the cat's current eye colour
+    public String getRightEye() {
+        return this.rightEye;
     }
 
     // MODIFIES: this
@@ -204,9 +218,11 @@ public class Cat implements SaveData {
         printWriter.print(SaveDataReader.DELIMITER);
         printWriter.print(pattern);
         printWriter.print(SaveDataReader.DELIMITER);
-        printWriter.print(nose);
+        printWriter.print(skin);
         printWriter.print(SaveDataReader.DELIMITER);
-        printWriter.print(eyes);
+        printWriter.print(leftEye);
+        printWriter.print(SaveDataReader.DELIMITER);
+        printWriter.print(rightEye);
         printWriter.print(SaveDataReader.DELIMITER);
         saveDirection(printWriter);
         printWriter.print(SaveDataReader.DELIMITER);

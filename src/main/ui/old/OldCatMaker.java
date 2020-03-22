@@ -1,3 +1,4 @@
+package ui.old;/*
 package ui.old;
 
 import model.cat.Cat;
@@ -189,9 +190,9 @@ public class OldCatMaker {
         System.out.println("\tgrey");
         System.out.println("\tblack");
 
-        String nose = userInput.next();
-        userCat.changeNose(nose);
-        System.out.println("\n" + catName + "'s new nose colour is now " + nose + ".");
+        String skin = userInput.next();
+        userCat.changeSkin(skin);
+        System.out.println("\n" + catName + "'s new nose colour is now " + skin + ".");
     }
 
     // MODIFIES: this
@@ -384,7 +385,7 @@ public class OldCatMaker {
     private void descriptionCommand() {
         System.out.println("\n" + catName + "'s Description");
         System.out.println(catName + " is a " + userCat.getBase() + " " + userCat.getPattern() + " cat.");
-        System.out.println(catName + " has " + userCat.getEyes() + " eyes and a " + userCat.getNose() + " nose.");
+        System.out.println(catName + " has " + userCat.getLeftEye() + " eyes and a " + userCat.getSkin() + " nose.");
         System.out.println(catName + " is currently wearing " + userCat.getAllAccessories() + ".");
         System.out.println(catName + " currently has a(n) " + userCat.getBackground() + " background.");
         System.out.println(catName + " is facing " + userCat.getDirection() + ".");
@@ -460,3 +461,4 @@ public class OldCatMaker {
     }
 
 }
+*/
