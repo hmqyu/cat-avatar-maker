@@ -80,9 +80,9 @@ public class SaveDataReader {
         String skin = fields.get(3);
         String leftEye = fields.get(4);
         String rightEye = fields.get(5);
-        CatDirection direction = new CatDirection(fields.get(6), fields.get(7));
-        Accessory accessories = new Accessory(splitter(fields.get(8), ACCESSORY_DELIMITER));
-        Background background = new Background(fields.get(9));
+        CatDirection direction = new CatDirection(fields.get(6));
+        Accessory accessories = new Accessory(splitter(fields.get(7), ACCESSORY_DELIMITER));
+        Background background = new Background(fields.get(8));
         return new Cat(name, base, pattern, skin, leftEye, rightEye, direction, accessories, background);
     }
 }

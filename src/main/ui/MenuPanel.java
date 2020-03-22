@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MenuPanel {
-    public static final int WIDTH = 700;
+    public static final int WIDTH = 650;
     public static final int HEIGHT = 500;
 
     private static final String CAT_COLLECTION = "./data/CatCollection.txt";
@@ -36,6 +36,17 @@ public class MenuPanel {
 
     public MenuPanel(Stage stage) {
         userCat = new Cat();
+        menuScreen = new StackPane();
+        loadCollection();
+        loadMenuButtons();
+        menuScreen.setStyle("-fx-background-color: #f5efed");
+        currentStage = stage;
+        currentStage.setScene(new Scene(menuScreen, WIDTH, HEIGHT));
+        currentStage.show();
+    }
+
+    public MenuPanel(Stage stage, Cat cat) {
+        userCat = cat;
         menuScreen = new StackPane();
         loadMenuButtons();
         menuScreen.setStyle("-fx-background-color: #f5efed");
@@ -59,7 +70,7 @@ public class MenuPanel {
         newButtonImage.setImage(new Image("ui/images/system/NewButton.png"));
         newButton = new Button("", newButtonImage);
         newButton.setStyle("-fx-background-color: transparent;");
-        newButton.setOnAction(event -> new MakerPanel(currentStage, userCat));
+        newButton.setOnAction(event -> new MakerPanel(currentStage, userCat, collection));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         newButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -73,7 +84,7 @@ public class MenuPanel {
         loadButtonImage.setImage(new Image("ui/images/system/LoadButton.png"));
         loadButton = new Button("", loadButtonImage);
         loadButton.setStyle("-fx-background-color: transparent;");
-        loadButton.setOnAction(event -> loadCollection());
+        loadButton.setOnAction(event -> new LoadPanel(currentStage, collection));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         loadButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -87,7 +98,7 @@ public class MenuPanel {
         helpButtonImage.setImage(new Image("ui/images/system/HelpButton.png"));
         helpButton = new Button("", helpButtonImage);
         helpButton.setStyle("-fx-background-color: transparent;");
-        helpButton.setOnAction(event -> new HelpPanel(currentStage));
+        helpButton.setOnAction(event -> new HelpPanel(currentStage, userCat));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         helpButton.addEventHandler(MouseEvent.MOUSE_ENTERED,

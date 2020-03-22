@@ -1,1 +1,1 @@
-Holly,white,solid,pink,yellow,yellow,forward,right,,empty
+Holly,white,solid,pink,yellow,yellow,right,,empty

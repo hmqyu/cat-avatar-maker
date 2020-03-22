@@ -34,7 +34,7 @@ public class SaveDataReaderTest {
             assertEquals("solid", holly.getPattern());
             assertEquals("pink", holly.getSkin());
             assertEquals("yellow", holly.getLeftEye());
-            assertEquals("forward and to the right", holly.getDirection());
+            assertEquals("right", holly.getDirection());
             assertEquals("no accessories", holly.getAllAccessories());
             assertEquals("empty", holly.getBackground());
         }
@@ -54,7 +54,7 @@ public class SaveDataReaderTest {
             assertEquals("solid", holly.getPattern());
             assertEquals("pink", holly.getSkin());
             assertEquals("yellow", holly.getLeftEye());
-            assertEquals("forward and to the right", holly.getDirection());
+            assertEquals("right", holly.getDirection());
             assertEquals("no accessories", holly.getAllAccessories());
             assertEquals("empty", holly.getBackground());
 
@@ -64,7 +64,7 @@ public class SaveDataReaderTest {
             assertEquals("tabby", heeny.getPattern());
             assertEquals("pink", heeny.getSkin());
             assertEquals("copper", heeny.getLeftEye());
-            assertEquals("backward and to the right", heeny.getDirection());
+            assertEquals("right", heeny.getDirection());
             assertEquals("a bag", heeny.getAllAccessories());
             assertEquals("garden", heeny.getBackground());
 
@@ -74,7 +74,7 @@ public class SaveDataReaderTest {
             assertEquals("calico", al.getPattern());
             assertEquals("mauve", al.getSkin());
             assertEquals("green", al.getLeftEye());
-            assertEquals("forward and to the left", al.getDirection());
+            assertEquals("left", al.getDirection());
             assertEquals("horns, and an amulet", al.getAllAccessories());
             assertEquals("nighttime", al.getBackground());
         }

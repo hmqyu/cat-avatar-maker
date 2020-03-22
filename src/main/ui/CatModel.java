@@ -5,6 +5,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import model.addons.Accessory;
 import model.addons.Background;
 import model.cat.Cat;
@@ -14,8 +15,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CatModel {
+    private Stage currentStage;
     private StackPane screen;
     private Cat userCat;
+    private String isFlipped;
     private ImageView body;
     private ImageView face;
     private ImageView leftEye;
@@ -26,9 +29,11 @@ public class CatModel {
     private ArrayList<ImageView> accessories;
     private ImageView background;
 
-    public CatModel(StackPane screen, Cat cat) {
+    public CatModel(Stage stage, StackPane screen, Cat cat) {
+        currentStage = stage;
         this.screen = screen;
         userCat = cat;
+        isFlipped = cat.getDirection();
         accessories = new ArrayList<>();
         loadCat();
     }
@@ -40,19 +45,25 @@ public class CatModel {
         renderSkin();
         renderPattern();
         renderAccessories();
-        screen.getChildren().addAll(background, base, skin, face, leftEye, rightEye, pattern, body);
+        if (isFlipped.equals("right")) {
+            flipModel();
+        }
+        screen.getChildren().addAll(background, base, pattern, skin, face, leftEye, rightEye, body);
         for (ImageView accessory : accessories) {
             screen.getChildren().add(accessory);
         }
         screen.setAlignment(Pos.CENTER_LEFT);
+        if (userCat.getBase().equals("White") && userCat.getRightEye().equals("Blue")
+                && (userCat.getLeftEye().equals("Yellow"))) {
+            currentStage.getIcons().add(new Image("ui/images/system/snas.png"));
+            currentStage.setTitle("it's a beautiful day outside.");
+        }
     }
 
     private void renderBackground() {
         String backgroundScene = userCat.getBackground();
         background = new ImageView();
-        if (!backgroundScene.equals("Empty")) {
-            background.setImage(new Image("ui/images/backgrounds/" + backgroundScene + "Background.png"));
-        }
+        background.setImage(new Image("ui/images/backgrounds/" + backgroundScene + "Background.png"));
     }
 
     private void renderBase() {
@@ -97,6 +108,18 @@ public class CatModel {
             ImageView accessoryImage = new ImageView();
             accessoryImage.setImage(new Image("ui/images/accessories/" + accessory + ".png"));
             accessories.add(accessoryImage);
+        }
+    }
+
+    private void flipModel() {
+        body.setScaleX(-1);
+        face.setScaleX(-1);
+        leftEye.setScaleX(-1);
+        rightEye.setScaleX(-1);
+        skin.setScaleX(-1);
+        base.setScaleX(-1);
+        for (ImageView accessory : accessories) {
+            accessory.setScaleX(-1);
         }
     }
 

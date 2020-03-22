@@ -33,7 +33,7 @@ public class Cat implements SaveData {
         this.rightEye = "Yellow";
         this.direction = new CatDirection();
         this.accessories = new Accessory();
-        this.background = new Background();
+        this.background = new Background("Nighttime");
     }
 
     // EFFECTS: creates a cat with name, base, pattern, nose, eyes, direction, accessories, background
@@ -122,15 +122,9 @@ public class Cat implements SaveData {
         this.direction.flip();
     }
 
-    // MODIFIES: this
-    // EFFECTS: turns the cat around to change where it's facing
-    public void turnDirection() {
-        this.direction.turn();
-    }
-
     // EFFECTS: returns the cat's current direction as a string
     public String getDirection() {
-        return this.direction.getFacing() + " and to the " + this.direction.getSide();
+        return this.direction.getSide();
     }
 
     // MODIFIES: this
@@ -228,18 +222,11 @@ public class Cat implements SaveData {
         printWriter.print(SaveDataReader.DELIMITER);
         printWriter.print(rightEye);
         printWriter.print(SaveDataReader.DELIMITER);
-        saveDirection(printWriter);
+        printWriter.print(direction.getSide());
         printWriter.print(SaveDataReader.DELIMITER);
         saveAccessory(printWriter);
         printWriter.print(SaveDataReader.DELIMITER);
         printWriter.println(background.getBackground());
-    }
-
-    // EFFECTS: saves a cat's direction to a file
-    private void saveDirection(PrintWriter printWriter) {
-        printWriter.print(direction.getFacing());
-        printWriter.print(SaveDataReader.DELIMITER);
-        printWriter.print(direction.getSide());
     }
 
     // EFFECTS: saves all of a cat's accessories (if any) to a file

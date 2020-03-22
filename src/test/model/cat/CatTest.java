@@ -27,7 +27,7 @@ class CatTest {
         changeBackgroundCat = new Cat();
 
         persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
-                new CatDirection("backward", "right"), new Accessory(),
+                new CatDirection("right"), new Accessory(),
                 new Background("Nighttime"));
 
         changeMultipleCat = new Cat();
@@ -47,7 +47,7 @@ class CatTest {
         assertEquals("Pink", constructorCat.getSkin());
         assertEquals("Yellow", constructorCat.getLeftEye());
         assertEquals("Yellow", constructorCat.getRightEye());
-        assertEquals("forward and to the right", constructorCat.getDirection());
+        assertEquals("left", constructorCat.getDirection());
         assertEquals("no accessories", constructorCat.getAllAccessories());
         assertEquals("Empty", constructorCat.getBackground());
     }
@@ -60,7 +60,7 @@ class CatTest {
         assertEquals("pink", persistenceCat.getSkin());
         assertEquals("copper", persistenceCat.getLeftEye());
         assertEquals("copper", persistenceCat.getRightEye());
-        assertEquals("backward and to the right", persistenceCat.getDirection());
+        assertEquals("right", persistenceCat.getDirection());
         assertEquals("no accessories", persistenceCat.getAllAccessories());
         assertEquals("Nighttime", persistenceCat.getBackground());
     }
@@ -76,17 +76,9 @@ class CatTest {
 
     @Test
     void testDirection() {
-        assertEquals("forward and to the right", changeDirectionCat.getDirection());
-
+        assertEquals("left", changeDirectionCat.getDirection());
         changeDirectionCat.flipDirection();
-        assertEquals("forward and to the left", changeDirectionCat.getDirection());
-
-        changeDirectionCat.turnDirection();
-        assertEquals("backward and to the left", changeDirectionCat.getDirection());
-
-        changeDirectionCat.flipDirection();
-        changeDirectionCat.turnDirection();
-        assertEquals("forward and to the right", changeDirectionCat.getDirection());
+        assertEquals("right", changeDirectionCat.getDirection());
     }
 
     @Test

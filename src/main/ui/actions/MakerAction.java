@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
+import model.cat.CatCollection;
 import ui.MakerPanel;
 
 public class MakerAction {
@@ -18,11 +19,13 @@ public class MakerAction {
     protected Stage currentStage;
     protected StackPane makerScreen;
     protected Cat userCat;
+    protected CatCollection userCollection;
 
-    public MakerAction(Stage stage, StackPane screen, Cat cat) {
+    public MakerAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         currentStage = stage;
         makerScreen = screen;
         userCat = cat;
+        userCollection = collection;
         loadOkayButton();
     }
 
@@ -31,7 +34,7 @@ public class MakerAction {
         buttonImage.setImage(new Image("ui/images/system/OkayButton.png"));
         Button button = new Button("", buttonImage);
         button.setStyle("-fx-background-color: transparent;");
-        button.setOnAction(event -> new MakerPanel(currentStage, userCat));
+        button.setOnAction(event -> new MakerPanel(currentStage, userCat, userCollection));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,

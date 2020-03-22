@@ -1,3 +1,3 @@
-Holly,white,solid,pink,yellow,yellow,forward,right,,empty
-Heeny,red,tabby,pink,copper,copper,backward,right,bag,garden
-Al,red,calico,mauve,green,green,forward,left,horns&amulet,nighttime
+Holly,white,solid,pink,yellow,yellow,right,,empty
+Heeny,red,tabby,pink,copper,copper,right,bag,garden
+Al,red,calico,mauve,green,green,left,horns&amulet,nighttime

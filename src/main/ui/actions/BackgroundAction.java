@@ -12,18 +12,19 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.CatModel;
 
-public class BaseAction extends MakerAction {
+public class BackgroundAction extends MakerAction {
+    public static final String[] BACKGROUNDS = {"Empty", "Beach", "Forest", "Home", "Nighttime"};
 
-    public BaseAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
+    public BackgroundAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
         loadColourButtons();
     }
 
     private void loadColourButtons() {
         int addY = -50;
-        for (int count = 0; count < COLOURS.length; count++) {
+        for (int count = 0; count < BACKGROUNDS.length; count++) {
             ImageView buttonImage = new ImageView();
-            buttonImage.setImage(new Image("ui/images/system/colours/" + COLOURS[count] + ".png"));
+            buttonImage.setImage(new Image("ui/images/system/backgrounds/" + BACKGROUNDS[count] + ".png"));
             Button button = new Button("", buttonImage);
             button.setStyle("-fx-background-color: transparent;");
             int finalCount = count;
@@ -46,7 +47,7 @@ public class BaseAction extends MakerAction {
     }
 
     private void buttonAction(int colourNum) {
-        userCat.changeBase(COLOURS[colourNum]);
+        userCat.changeBackground(BACKGROUNDS[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);
     }
 }

@@ -20,10 +20,10 @@ public class SaveDataWriterTest {
     private static final String FILE_TESTER = "./data/CatCollectionTest.txt";
     private ArrayList<Cat> catArrayListTester = new ArrayList<>();
     private Cat catArrayTester1 = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
-            new CatDirection("backward", "right"), new Accessory(),
+            new CatDirection("right"), new Accessory(),
             new Background("nighttime"));
     private Cat catArrayTester2 = new Cat("Holly", "brown", "tabby", "black", "green", "green",
-            new CatDirection("forward", "left"), new Accessory(),
+            new CatDirection("left"), new Accessory(),
             new Background("city"));
 
     private SaveDataWriter writerTester;
@@ -59,7 +59,7 @@ public class SaveDataWriterTest {
             assertEquals("tabby", heeny.getPattern());
             assertEquals("pink", heeny.getSkin());
             assertEquals("copper", heeny.getLeftEye());
-            assertEquals("backward and to the right", heeny.getDirection());
+            assertEquals("right", heeny.getDirection());
             assertEquals("a bag, an amulet, and wings", heeny.getAllAccessories());
             assertEquals("nighttime", heeny.getBackground());
 
@@ -69,7 +69,7 @@ public class SaveDataWriterTest {
             assertEquals("tabby", holly.getPattern());
             assertEquals("black", holly.getSkin());
             assertEquals("green", holly.getLeftEye());
-            assertEquals("forward and to the left", holly.getDirection());
+            assertEquals("left", holly.getDirection());
             assertEquals("no accessories", holly.getAllAccessories());
             assertEquals("city", holly.getBackground());
 
@@ -79,7 +79,7 @@ public class SaveDataWriterTest {
             assertEquals("Solid", yourCat.getPattern());
             assertEquals("Pink", yourCat.getSkin());
             assertEquals("Yellow", yourCat.getLeftEye());
-            assertEquals("forward and to the right", yourCat.getDirection());
+            assertEquals("left", yourCat.getDirection());
             assertEquals("no accessories", yourCat.getAllAccessories());
             assertEquals("Empty", yourCat.getBackground());
         } catch (IOException e) {

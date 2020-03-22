@@ -31,10 +31,10 @@ public class CatCollectionTest {
         alAccessories.add("horns");
         alAccessories.add("amulet");
         heeny = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
-                new CatDirection("backward", "right"), new Accessory(heenyAccessories),
+                new CatDirection("right"), new Accessory(heenyAccessories),
                 new Background("garden"));
         al = new Cat("Al", "red", "solid", "pink", "yellow", "yellow",
-                new CatDirection("forward", "left"), new Accessory(alAccessories),
+                new CatDirection("left"), new Accessory(alAccessories),
                 new Background("nighttime"));
 
         constructorC = new CatCollection();

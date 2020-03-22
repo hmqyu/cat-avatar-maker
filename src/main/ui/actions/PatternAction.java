@@ -9,14 +9,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
+import model.cat.CatCollection;
 import ui.CatModel;
 
 public class PatternAction extends MakerAction {
     public static final String[] PATTERNS = {"BlackTabby", "BrownTabby", "PointPattern", "RedTabby", "CreamTabby",
-            "BlueTabby", "SilverTabby", "WhiteTabby"};
+            "BlueTabby", "SilverTabby", "WhitePattern"};
 
-    public PatternAction(Stage stage, StackPane screen, Cat cat) {
-        super(stage, screen, cat);
+    public PatternAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
+        super(stage, screen, cat, collection);
         loadColourButtons();
     }
 
@@ -48,6 +49,6 @@ public class PatternAction extends MakerAction {
 
     private void buttonAction(int colourNum) {
         userCat.changePattern(PATTERNS[colourNum]);
-        new CatModel(makerScreen, userCat);
+        new CatModel(currentStage, makerScreen, userCat);
     }
 }
