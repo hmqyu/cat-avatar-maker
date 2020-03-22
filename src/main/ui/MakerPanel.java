@@ -10,7 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
+import ui.actions.BaseAction;
 import ui.actions.MakerAction;
+import ui.actions.PatternAction;
 
 public class MakerPanel {
     public static final int WIDTH = 650;
@@ -20,7 +22,6 @@ public class MakerPanel {
 
     private Stage currentStage;
     private StackPane makerScreen;
-    private CatModel catModel;
     private Cat userCat;
     private Button baseButton;
     private Button patternButton;
@@ -35,7 +36,7 @@ public class MakerPanel {
 
     public MakerPanel(Stage stage, Cat cat) {
         makerScreen = new StackPane();
-        catModel = new CatModel(makerScreen, cat);
+        new CatModel(makerScreen, cat);
         userCat = cat;
         loadMakerButtons();
         makerScreen.setStyle("-fx-background-color: #f5efed");
@@ -78,7 +79,7 @@ public class MakerPanel {
         patternButtonImage.setImage(new Image("ui/images/system/CoatPattern.png"));
         patternButton = new Button("", patternButtonImage);
         patternButton.setStyle("-fx-background-color: transparent;");
-        patternButton.setOnAction(event -> System.out.println("woo"));
+        patternButton.setOnAction(event -> patternAction());
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         patternButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -213,7 +214,13 @@ public class MakerPanel {
     private void colourAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
-        new MakerAction(currentStage, makerScreen, MakerAction.COLOURS, userCat);
+        new BaseAction(currentStage, makerScreen, userCat);
+    }
+
+    private void patternAction() {
+        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
+                backgroundButton, flipButton, divider, saveButton, menuButton);
+        new PatternAction(currentStage, makerScreen, userCat);
     }
 
 }

@@ -84,7 +84,9 @@ public class CatModel {
     private void renderPattern() {
         String patternColour = userCat.getPattern();
         pattern = new ImageView();
-        if (!patternColour.equals("Solid")) {
+        if (patternColour.equals("TortoiseshellTabby")) {
+            pattern.setImage(new Image("ui/images/cat/pattern/BrownTabby.png"));
+        } else if (!patternColour.equals("Solid")) {
             pattern.setImage(new Image("ui/images/cat/pattern/" + patternColour + ".png"));
         }
     }
