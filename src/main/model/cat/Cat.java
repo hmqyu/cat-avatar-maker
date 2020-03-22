@@ -33,7 +33,7 @@ public class Cat implements SaveData {
         this.rightEye = "Yellow";
         this.direction = new CatDirection();
         this.accessories = new Accessory();
-        this.background = new Background();
+        this.background = new Background("Nighttime");
     }
 
     // EFFECTS: creates a cat with name, base, pattern, nose, eyes, direction, accessories, background

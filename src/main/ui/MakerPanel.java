@@ -10,10 +10,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
+import ui.actions.MakerAction;
 
 public class MakerPanel {
-    public static final int WIDTH = 700;
+    public static final int WIDTH = 650;
     public static final int HEIGHT = 500;
+
+    private static final int BUTTON_X_COORD = 390;
 
     private Stage currentStage;
     private StackPane makerScreen;
@@ -58,7 +61,7 @@ public class MakerPanel {
         baseButtonImage.setImage(new Image("ui/images/system/BaseColour.png"));
         baseButton = new Button("", baseButtonImage);
         baseButton.setStyle("-fx-background-color: transparent;");
-        //baseButton.setOnAction(event -> new BaseAction(currentStage));
+        baseButton.setOnAction(event -> new MakerAction(makerScreen, MakerAction.COLOURS));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         baseButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -182,25 +185,25 @@ public class MakerPanel {
     private void setPositions(ImageView divider) {
         makerScreen.getChildren().addAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
-        baseButton.setTranslateX(440);
+        baseButton.setTranslateX(BUTTON_X_COORD);
         baseButton.setTranslateY(-225);
-        patternButton.setTranslateX(440);
+        patternButton.setTranslateX(BUTTON_X_COORD);
         patternButton.setTranslateY(-175);
-        eyesButton.setTranslateX(440);
+        eyesButton.setTranslateX(BUTTON_X_COORD);
         eyesButton.setTranslateY(-125);
-        skinButton.setTranslateX(440);
+        skinButton.setTranslateX(BUTTON_X_COORD);
         skinButton.setTranslateY(-75);
-        accessoriesButton.setTranslateX(440);
+        accessoriesButton.setTranslateX(BUTTON_X_COORD);
         accessoriesButton.setTranslateY(-25);
-        backgroundButton.setTranslateX(440);
+        backgroundButton.setTranslateX(BUTTON_X_COORD);
         backgroundButton.setTranslateY(25);
-        flipButton.setTranslateX(440);
+        flipButton.setTranslateX(BUTTON_X_COORD);
         flipButton.setTranslateY(75);
-        divider.setTranslateX(450);
+        divider.setTranslateX(BUTTON_X_COORD + 10);
         divider.setTranslateY(125);
-        saveButton.setTranslateX(440);
+        saveButton.setTranslateX(BUTTON_X_COORD);
         saveButton.setTranslateY(175);
-        menuButton.setTranslateX(440);
+        menuButton.setTranslateX(BUTTON_X_COORD);
         menuButton.setTranslateY(225);
     }
 
