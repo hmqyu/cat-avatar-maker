@@ -16,18 +16,18 @@ import java.util.ArrayList;
 
 public class CatModel {
     private Stage currentStage;
-    private StackPane screen;
-    private Cat userCat;
-    private String isFlipped;
-    private ImageView body;
-    private ImageView face;
-    private ImageView leftEye;
-    private ImageView rightEye;
-    private ImageView skin;
-    private ImageView base;
-    private ImageView pattern;
-    private ArrayList<ImageView> accessories;
-    private ImageView background;
+    protected StackPane screen;
+    protected Cat userCat;
+    protected String isFlipped;
+    protected ImageView body;
+    protected ImageView face;
+    protected ImageView leftEye;
+    protected ImageView rightEye;
+    protected ImageView skin;
+    protected ImageView base;
+    protected ImageView pattern;
+    protected ArrayList<ImageView> accessories;
+    protected ImageView background;
 
     public CatModel(Stage stage, StackPane screen, Cat cat) {
         currentStage = stage;
@@ -60,13 +60,13 @@ public class CatModel {
         }
     }
 
-    private void renderBackground() {
+    protected void renderBackground() {
         String backgroundScene = userCat.getBackground();
         background = new ImageView();
         background.setImage(new Image("ui/images/backgrounds/" + backgroundScene + "Background.png"));
     }
 
-    private void renderBase() {
+    protected void renderBase() {
         String baseColour = userCat.getBase();
         face = new ImageView();
         face.setImage(new Image("ui/images/cat/base/" + baseColour + "Face.png"));
@@ -76,7 +76,7 @@ public class CatModel {
         body.setImage(new Image("ui/images/cat/base/BodyLine.png"));
     }
 
-    private void renderEyes() {
+    protected void renderEyes() {
         String leftEyeColour = userCat.getLeftEye();
         leftEye = new ImageView();
         leftEye.setImage(new Image("ui/images/cat/eyes/" + leftEyeColour + "Left.png"));
@@ -86,13 +86,13 @@ public class CatModel {
         rightEye.setImage(new Image("ui/images/cat/eyes/" + rightEyeColour + "Right.png"));
     }
 
-    private void renderSkin() {
+    protected void renderSkin() {
         String skinColour = userCat.getSkin();
         skin = new ImageView();
         skin.setImage(new Image("ui/images/cat/skin/" + skinColour + "Skin.png"));
     }
 
-    private void renderPattern() {
+    protected void renderPattern() {
         String patternColour = userCat.getPattern();
         pattern = new ImageView();
         if (patternColour.equals("TortoiseshellTabby")) {
@@ -102,7 +102,7 @@ public class CatModel {
         }
     }
 
-    private void renderAccessories() {
+    protected void renderAccessories() {
         ArrayList<String> accessoriesList = userCat.getAccessoriesList();
         for (String accessory : accessoriesList) {
             ImageView accessoryImage = new ImageView();
@@ -111,13 +111,14 @@ public class CatModel {
         }
     }
 
-    private void flipModel() {
+    protected void flipModel() {
         body.setScaleX(-1);
         face.setScaleX(-1);
         leftEye.setScaleX(-1);
         rightEye.setScaleX(-1);
         skin.setScaleX(-1);
         base.setScaleX(-1);
+        pattern.setScaleX(-1);
         for (ImageView accessory : accessories) {
             accessory.setScaleX(-1);
         }

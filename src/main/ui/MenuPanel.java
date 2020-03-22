@@ -48,6 +48,7 @@ public class MenuPanel {
     public MenuPanel(Stage stage, Cat cat) {
         userCat = cat;
         menuScreen = new StackPane();
+        loadCollection();
         loadMenuButtons();
         menuScreen.setStyle("-fx-background-color: #f5efed");
         currentStage = stage;
@@ -84,7 +85,7 @@ public class MenuPanel {
         loadButtonImage.setImage(new Image("ui/images/system/LoadButton.png"));
         loadButton = new Button("", loadButtonImage);
         loadButton.setStyle("-fx-background-color: transparent;");
-        loadButton.setOnAction(event -> new LoadPanel(currentStage, collection));
+        loadButton.setOnAction(event -> new LoadPanel(currentStage, collection, userCat));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         loadButton.addEventHandler(MouseEvent.MOUSE_ENTERED,

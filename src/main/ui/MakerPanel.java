@@ -288,6 +288,7 @@ public class MakerPanel {
 
     private void saveCommand(String name, VBox saveBox) {
         makerScreen.getChildren().remove(saveBox);
+        userCat = updateCat(userCat);
         userCat.changeName(name);
         try {
             SaveDataWriter writer = new SaveDataWriter(new File(CAT_COLLECTION));
@@ -320,5 +321,20 @@ public class MakerPanel {
         savedBox.getChildren().addAll(savedImage, button);
         savedBox.setAlignment(Pos.CENTER_RIGHT);
         makerScreen.getChildren().addAll(savedBox);
+    }
+
+    private Cat updateCat(Cat oldCat) {
+        Cat newCat = new Cat();
+        newCat.changeName(oldCat.getName());
+        newCat.changeBase(oldCat.getBase());
+        newCat.changePattern(oldCat.getPattern());
+        newCat.changeLeftEye(oldCat.getLeftEye());
+        newCat.changeRightEye(oldCat.getRightEye());
+        newCat.changeSkin(oldCat.getSkin());
+        newCat.changeBackground(oldCat.getBackground());
+        for (int i = 0; i < oldCat.getAccessoriesList().size(); i++) {
+            newCat.addAccessory(oldCat.getAccessoriesList().get(i));
+        }
+        return newCat;
     }
 }
