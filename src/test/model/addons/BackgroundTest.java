@@ -43,7 +43,6 @@ public class BackgroundTest {
     @Test
     void testChangingBackground() {
         assertTrue(changingBG.changeBackground("Beach"));
-        assertTrue(changingBG.changeBackground("Solid"));
         assertTrue(changingBG.changeBackground("Forest"));
         assertTrue(changingBG.changeBackground("Home"));
         assertTrue(changingBG.changeBackground("Nighttime"));

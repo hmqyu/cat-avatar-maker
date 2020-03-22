@@ -171,6 +171,10 @@ public class Cat implements SaveData {
         return accessoriesString;
     }
 
+    public ArrayList<String> getAccessoriesList() {
+        return accessories.getAllAccessories();
+    }
+
     // EFFECTS: returns word with its correct indefinite article
     private String addArticle(String word) {
         String firstLetter = word.substring(0, 1);

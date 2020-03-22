@@ -1,3 +1,0 @@
-six,red,solid,pink,green,forward,right,,empty
-Al,red,solid,pink,green,forward,right,,empty
-six,red,solid,pink,green,forward,right,,empty
