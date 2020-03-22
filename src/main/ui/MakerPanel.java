@@ -21,6 +21,7 @@ public class MakerPanel {
     private Stage currentStage;
     private StackPane makerScreen;
     private CatModel catModel;
+    private Cat userCat;
     private Button baseButton;
     private Button patternButton;
     private Button eyesButton;
@@ -28,12 +29,14 @@ public class MakerPanel {
     private Button flipButton;
     private Button accessoriesButton;
     private Button backgroundButton;
+    private ImageView divider;
     private Button saveButton;
     private Button menuButton;
 
     public MakerPanel(Stage stage, Cat cat) {
         makerScreen = new StackPane();
         catModel = new CatModel(makerScreen, cat);
+        userCat = cat;
         loadMakerButtons();
         makerScreen.setStyle("-fx-background-color: #f5efed");
         currentStage = stage;
@@ -51,9 +54,9 @@ public class MakerPanel {
         makeFlipButton();
         makeSaveButton();
         makeMenuButton();
-        ImageView divider = new ImageView();
+        divider = new ImageView();
         divider.setImage(new Image("ui/images/system/Divider.png"));
-        setPositions(divider);
+        setPositions();
     }
 
     private void makeBaseButton() {
@@ -61,7 +64,7 @@ public class MakerPanel {
         baseButtonImage.setImage(new Image("ui/images/system/BaseColour.png"));
         baseButton = new Button("", baseButtonImage);
         baseButton.setStyle("-fx-background-color: transparent;");
-        baseButton.setOnAction(event -> new MakerAction(makerScreen, MakerAction.COLOURS));
+        baseButton.setOnAction(event -> colourAction());
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         baseButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -182,7 +185,7 @@ public class MakerPanel {
                 event -> menuButton.setEffect(null));
     }
 
-    private void setPositions(ImageView divider) {
+    private void setPositions() {
         makerScreen.getChildren().addAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         baseButton.setTranslateX(BUTTON_X_COORD);
@@ -205,6 +208,12 @@ public class MakerPanel {
         saveButton.setTranslateY(175);
         menuButton.setTranslateX(BUTTON_X_COORD);
         menuButton.setTranslateY(225);
+    }
+
+    private void colourAction() {
+        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
+                backgroundButton, flipButton, divider, saveButton, menuButton);
+        new MakerAction(currentStage, makerScreen, MakerAction.COLOURS, userCat);
     }
 
 }
