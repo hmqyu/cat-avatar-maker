@@ -14,15 +14,21 @@ import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
 
+// Represents the load menu that allows the user to load a saved cat
 public class LoadPanel {
-    public static final int WIDTH = 650;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 650;    // width of the stage
+    public static final int HEIGHT = 500;   // height of the stage
 
-    private CatCollection userCollection;
-    private Stage currentStage;
-    private StackPane loadScreen;
-    private Cat userCat;
+    private CatCollection userCollection;   // the user's current cat collection
+    private Stage currentStage;             // the current stage
+    private StackPane loadScreen;           // the load screen
+    private Cat userCat;                    // the user's current cat
 
+    // EFFECTS: creates an interactive load screen with buttons of names of cats in userCollection, a back button, and
+    //          a header image
+    //          stage becomes the currentStage
+    //          collection becomes the user's current cat collection (userCollection)
+    //          cat becomes the user's current cat (userCat)
     public LoadPanel(Stage stage, CatCollection collection, Cat cat) {
         loadScreen = new StackPane();
         userCollection = collection;
@@ -35,6 +41,8 @@ public class LoadPanel {
         currentStage.show();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the cat name buttons and the header image on loadScreen
     private void loadSavedCats() {
         VBox buttonBox = new VBox(10);
         for (int i = 0; i < userCollection.getCollection().size(); i++) {
@@ -53,6 +61,8 @@ public class LoadPanel {
         loadScreen.getChildren().add(loadBox);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and loads a back button on loadScreen that allows the user to return to MenuPanel
     private void loadBackButton() {
         ImageView quitButtonImage = new ImageView();
         quitButtonImage.setImage(new Image("ui/images/system/BackButton.png"));
@@ -68,5 +78,4 @@ public class LoadPanel {
         loadScreen.getChildren().add(backButton);
         backButton.setTranslateY(200);
     }
-
 }

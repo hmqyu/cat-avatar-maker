@@ -11,15 +11,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 
+// Represents a help screen to guide the user on how to use the application
 public class HelpPanel {
-    public static final int WIDTH = 650;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 650;    // width of the stage
+    public static final int HEIGHT = 500;   // height of the stage
 
-    private Stage currentStage;
-    private StackPane helpScreen;
-    private Button backButton;
-    private Cat userCat;
+    private Stage currentStage;     // the current stage
+    private StackPane helpScreen;   // the help screen
+    private Button backButton;      // the back button
+    private Cat userCat;            // the user's current cat
 
+    // EFFECTS: creates an interactive help screen with a back button
+    //          stage becomes the currentStage
+    //          cat becomes the user's current cat (userCat)
     public HelpPanel(Stage stage, Cat cat) {
         helpScreen = new StackPane();
         userCat = cat;
@@ -34,6 +38,8 @@ public class HelpPanel {
         currentStage.show();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the back button onto helpScreen
     private void loadBackButton() {
         makeBackButton();
         helpScreen.getChildren().add(backButton);
@@ -41,6 +47,8 @@ public class HelpPanel {
         backButton.setTranslateY(155);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a back button that allows the user to go back to MenuPanel
     private void makeBackButton() {
         ImageView quitButtonImage = new ImageView();
         quitButtonImage.setImage(new Image("ui/images/system/BackButton.png"));

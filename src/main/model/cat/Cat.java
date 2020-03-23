@@ -165,6 +165,7 @@ public class Cat implements SaveData {
         return accessoriesString;
     }
 
+    // EFFECTS: returns the ArrayList<String> within accessories
     public ArrayList<String> getAccessoriesList() {
         return accessories.getAllAccessories();
     }

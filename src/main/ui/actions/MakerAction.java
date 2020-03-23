@@ -12,15 +12,21 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.MakerPanel;
 
+// Represents a base action panel for all maker buttons
 public class MakerAction {
     public static final String[] COLOURS = {"Black", "Brown", "Tortoiseshell", "Red", "Cream", "Blue", "Silver",
-            "White"};
-    protected static final int BUTTON_X_COORD = 390;
-    protected Stage currentStage;
-    protected StackPane makerScreen;
-    protected Cat userCat;
-    protected CatCollection userCollection;
+            "White"};   // all available colours for a cat's images
+    protected static final int BUTTON_X_COORD = 390;   // location of the buttons' x-coordinate
+    protected Stage currentStage;   // the current stage
+    protected StackPane makerScreen;   // the maker screen
+    protected Cat userCat;   // the user's current cat
+    protected CatCollection userCollection;   // the user's current cat collection
 
+    // EFFECTS: creates an interactive action panel with an okay button
+    //          stage becomes the currentStage
+    //          screen becomes the makerScreen
+    //          cat becomes the user's current cat (userCat)
+    //          collection becomes the user's current cat collection (userCollection)
     public MakerAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         currentStage = stage;
         makerScreen = screen;
@@ -29,6 +35,8 @@ public class MakerAction {
         loadOkayButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates an okay button that returns the user back to MakerPanel
     protected void loadOkayButton() {
         ImageView buttonImage = new ImageView();
         buttonImage.setImage(new Image("ui/images/system/OkayButton.png"));

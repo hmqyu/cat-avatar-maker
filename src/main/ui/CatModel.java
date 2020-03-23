@@ -14,21 +14,26 @@ import model.cat.CatDirection;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+// Represents a cat avatar
 public class CatModel {
-    private Stage currentStage;
-    protected StackPane screen;
-    protected Cat userCat;
-    protected String isFlipped;
-    protected ImageView body;
-    protected ImageView face;
-    protected ImageView leftEye;
-    protected ImageView rightEye;
-    protected ImageView skin;
-    protected ImageView base;
-    protected ImageView pattern;
-    protected ArrayList<ImageView> accessories;
-    protected ImageView background;
+    private Stage currentStage;                   // the current stage
+    protected StackPane screen;                   // the current screen (makerScreen)
+    protected Cat userCat;                        // the user's current cat
+    protected String isFlipped;                   // the cat's current direction
+    protected ImageView body;                     // the cat's current body image
+    protected ImageView face;                     // the cat's current face lines image
+    protected ImageView leftEye;                  // the cat's current left eye image
+    protected ImageView rightEye;                 // the cat's current right eye image
+    protected ImageView skin;                     // the cat's current skin image
+    protected ImageView base;                     // the cat's current base colour image
+    protected ImageView pattern;                  // the cat's current coat pattern image
+    protected ArrayList<ImageView> accessories;   // the cat's current accessories's images
+    protected ImageView background;               // the cat's current background image
 
+    // EFFECTS: creates a cat avatar from cat
+    //          stage becomes the currentStage
+    //          screen becomes the current screen to apply the cat avatar to
+    //          cat becomes the user's current cat (userCat)
     public CatModel(Stage stage, StackPane screen, Cat cat) {
         currentStage = stage;
         this.screen = screen;
@@ -38,6 +43,8 @@ public class CatModel {
         loadCat();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the cat's body, face, eyes, skin, base, pattern, accessories, and background images onto screen
     private void loadCat() {
         renderBackground();
         renderBase();
@@ -60,12 +67,16 @@ public class CatModel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's background image
     protected void renderBackground() {
         String backgroundScene = userCat.getBackground();
         background = new ImageView();
         background.setImage(new Image("ui/images/backgrounds/" + backgroundScene + "Background.png"));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's base and face lines images
     protected void renderBase() {
         String baseColour = userCat.getBase();
         face = new ImageView();
@@ -76,6 +87,8 @@ public class CatModel {
         body.setImage(new Image("ui/images/cat/base/BodyLine.png"));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's eye images
     protected void renderEyes() {
         String leftEyeColour = userCat.getLeftEye();
         leftEye = new ImageView();
@@ -86,12 +99,16 @@ public class CatModel {
         rightEye.setImage(new Image("ui/images/cat/eyes/" + rightEyeColour + "Right.png"));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's skin image
     protected void renderSkin() {
         String skinColour = userCat.getSkin();
         skin = new ImageView();
         skin.setImage(new Image("ui/images/cat/skin/" + skinColour + "Skin.png"));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's pattern image
     protected void renderPattern() {
         String patternColour = userCat.getPattern();
         pattern = new ImageView();
@@ -102,6 +119,8 @@ public class CatModel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and renders the cat's accessories' images
     protected void renderAccessories() {
         ArrayList<String> accessoriesList = userCat.getAccessoriesList();
         for (String accessory : accessoriesList) {
@@ -111,6 +130,8 @@ public class CatModel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: flips the cat avatar images from left to right, and vice versa
     protected void flipModel() {
         body.setScaleX(-1);
         face.setScaleX(-1);

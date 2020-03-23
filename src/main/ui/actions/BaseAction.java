@@ -12,13 +12,17 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.CatModel;
 
+// Represents an action panel for a cat's skin colour
 public class BaseAction extends MakerAction {
 
+    // EFFECTS: creates an action panel that lets the user change a cat's base colour
     public BaseAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
         loadColourButtons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates base colour buttons that let the user change the cat's base colour
     private void loadColourButtons() {
         int addY = -50;
         for (int count = 0; count < COLOURS.length; count++) {
@@ -45,6 +49,8 @@ public class BaseAction extends MakerAction {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the cat's base colour and updates the CatModel
     private void buttonAction(int colourNum) {
         userCat.changeBase(COLOURS[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);

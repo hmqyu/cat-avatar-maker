@@ -12,15 +12,20 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.CatModel;
 
+// Represents an action panel for a cat's eye colours
 public class EyesAction extends MakerAction {
-    public static final String[] EYES = {"Copper", "Pink", "Yellow", "Green", "Blue"};
+    public static final String[] EYES = {"Copper", "Pink", "Yellow", "Green", "Blue"};   // all available eye colours
+                                                                                         // for a cat
 
+    // EFFECTS: creates an action panel that lets the user change a cat's eye colours
     public EyesAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
         loadLeftColourButtons();
         loadRightColourButtons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates left eye colour buttons that let the user change the cat's left eye colour
     private void loadLeftColourButtons() {
         for (int count = 0; count < EYES.length; count++) {
             ImageView buttonImage = new ImageView();
@@ -41,6 +46,8 @@ public class EyesAction extends MakerAction {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates right eye colour buttons that let the user change the cat's right eye colour
     private void loadRightColourButtons() {
         for (int count = 0; count < EYES.length; count++) {
             ImageView buttonImage = new ImageView();
@@ -61,11 +68,15 @@ public class EyesAction extends MakerAction {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the cat's left eye colour and updates the CatModel
     private void leftButtonAction(int colourNum) {
         userCat.changeLeftEye(EYES[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the cat's right eye colour and updates the CatModel
     private void rightButtonAction(int colourNum) {
         userCat.changeRightEye(EYES[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);

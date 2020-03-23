@@ -12,14 +12,20 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.CatModel;
 
+// Represents an action panel for a cat's background image
 public class BackgroundAction extends MakerAction {
-    public static final String[] BACKGROUNDS = {"Empty", "Beach", "Forest", "Home", "Nighttime"};
+    public static final String[] BACKGROUNDS = {"Empty", "Beach", "Forest", "Home", "Nighttime"};   // all available
+                                                                                                    // backgrounds for
+                                                                                                    // a cat
 
+    // EFFECTS: creates an action panel that lets the user change a cat's background image
     public BackgroundAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
         loadColourButtons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates background image buttons that let the user change the cat's background image
     private void loadColourButtons() {
         int addY = -50;
         for (int count = 0; count < BACKGROUNDS.length; count++) {
@@ -46,6 +52,8 @@ public class BackgroundAction extends MakerAction {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the cat's background image and updates the CatModel
     private void buttonAction(int colourNum) {
         userCat.changeBackground(BACKGROUNDS[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);

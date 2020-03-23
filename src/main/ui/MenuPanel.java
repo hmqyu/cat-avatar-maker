@@ -19,32 +19,25 @@ import persistence.SaveDataReader;
 import java.io.File;
 import java.io.IOException;
 
+// Represents the "intro" menu screen for the Cat Maker
 public class MenuPanel {
-    public static final int WIDTH = 650;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 650;    // width of the stage
+    public static final int HEIGHT = 500;   // height of the stage
 
-    private static final String CAT_COLLECTION = "./data/CatCollection.txt";
-    private CatCollection collection;
-    private Cat userCat;
+    private static final String CAT_COLLECTION = "./data/CatCollection.txt";   // text file to store the cat collection
+    private CatCollection collection;   // the user's current cat collection
+    private Cat userCat;   // the user's current cat
 
-    private Stage currentStage;
-    private StackPane menuScreen;
-    private Button newButton;
-    private Button loadButton;
-    private Button helpButton;
-    private Button quitButton;
+    private Stage currentStage;     // the current stage
+    private StackPane menuScreen;   // the menu screen
+    private Button newButton;       // the new button
+    private Button loadButton;      // the load button
+    private Button helpButton;      // the help button
+    private Button quitButton;      // the quit button
 
-    public MenuPanel(Stage stage) {
-        userCat = new Cat();
-        menuScreen = new StackPane();
-        loadCollection();
-        loadMenuButtons();
-        menuScreen.setStyle("-fx-background-color: #f5efed");
-        currentStage = stage;
-        currentStage.setScene(new Scene(menuScreen, WIDTH, HEIGHT));
-        currentStage.show();
-    }
-
+    // EFFECTS: creates an interactive menu screen with new, load, help, and quit buttons
+    //          stage becomes the currentStage
+    //          cat becomes the user's current cat (userCat)
     public MenuPanel(Stage stage, Cat cat) {
         userCat = cat;
         menuScreen = new StackPane();
@@ -56,6 +49,8 @@ public class MenuPanel {
         currentStage.show();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the new, load, help, and quit buttons, and the header image on menuScreen
     private void loadMenuButtons() {
         makeNewButton();
         makeLoadButton();
@@ -66,6 +61,8 @@ public class MenuPanel {
         setPositions(title);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a new button to lead the user to MakerPanel
     private void makeNewButton() {
         ImageView newButtonImage = new ImageView();
         newButtonImage.setImage(new Image("ui/images/system/NewButton.png"));
@@ -80,6 +77,8 @@ public class MenuPanel {
                 event -> newButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a load button to lead the user to LoadPanel
     private void makeLoadButton() {
         ImageView loadButtonImage = new ImageView();
         loadButtonImage.setImage(new Image("ui/images/system/LoadButton.png"));
@@ -94,6 +93,8 @@ public class MenuPanel {
                 event -> loadButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a help button to lead the user to HelpPanel
     private void makeHelpButton() {
         ImageView helpButtonImage = new ImageView();
         helpButtonImage.setImage(new Image("ui/images/system/HelpButton.png"));
@@ -108,6 +109,8 @@ public class MenuPanel {
                 event -> helpButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a new button that lets the user quit the application
     private void makeQuitButton() {
         ImageView quitButtonImage = new ImageView();
         quitButtonImage.setImage(new Image("ui/images/system/QuitButton.png"));
@@ -122,6 +125,8 @@ public class MenuPanel {
                 event -> quitButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the buttons and title to menuScreen at static locations
     private void setPositions(ImageView title) {
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(newButton, loadButton, helpButton, quitButton);
@@ -133,6 +138,8 @@ public class MenuPanel {
         menuScreen.getChildren().add(titleBox);
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads a CatCollection from the file CAT_COLLECTION
     private void loadCollection() {
         try {
             collection = SaveDataReader.readCollection(new File(CAT_COLLECTION));

@@ -1,18 +1,14 @@
 package ui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,28 +22,34 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
+// Represents an interactive cat avatar maker
 public class MakerPanel {
-    public static final int WIDTH = 650;
-    public static final int HEIGHT = 500;
-    private static final int BUTTON_X_COORD = 390;
+    public static final int WIDTH = 650;                                       // width of the stage
+    public static final int HEIGHT = 500;                                      // height of the stage
+    private static final int BUTTON_X_COORD = 390;                             // x-coordinate of the menu buttons
 
-    private static final String CAT_COLLECTION = "./data/CatCollection.txt";
-    private CatCollection userCollection;
+    private static final String CAT_COLLECTION = "./data/CatCollection.txt";   // text file to store the cat collection
+    private CatCollection userCollection;                                      // the user's current cat collection
 
-    private Stage currentStage;
-    private StackPane makerScreen;
-    private Cat userCat;
-    private Button baseButton;
-    private Button patternButton;
-    private Button eyesButton;
-    private Button skinButton;
-    private Button flipButton;
-    private Button accessoriesButton;
-    private Button backgroundButton;
-    private ImageView divider;
-    private Button saveButton;
-    private Button menuButton;
+    private Stage currentStage;                                                // the current stage
+    private StackPane makerScreen;                                             // the maker screen
+    private Cat userCat;                                                       // the user's current cat
+    private Button baseButton;                                                 // the base colour button
+    private Button patternButton;                                              // the coat pattern button
+    private Button eyesButton;                                                 // the eye colour button
+    private Button skinButton;                                                 // the skin colour button
+    private Button flipButton;                                                 // the flip direction button
+    private Button accessoriesButton;                                          // the accessories button
+    private Button backgroundButton;                                           // the backgrounds button
+    private ImageView divider;                                                 // a divider image for the menu
+    private Button saveButton;                                                 // the save cat button
+    private Button menuButton;                                                 // the return to menu button
 
+    // EFFECTS: creates an interactive maker screen with base, pattern, eyes, skin, flip, accessories, background,
+    //          save, and menu buttons, as well as a divider and a cat avatar that can be modified
+    //          stage becomes the currentStage
+    //          cat becomes the user's current cat (userCat)
+    //          collection becomes the user's current cat collection (userCollection)
     public MakerPanel(Stage stage, Cat cat, CatCollection collection) {
         currentStage = stage;
         makerScreen = new StackPane();
@@ -61,6 +63,9 @@ public class MakerPanel {
         currentStage.show();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the base, pattern, eyes, skin, flip, accessories, background, save, and menu buttons, as well as
+    //          the divider
     private void loadMakerButtons() {
         makeBaseButton();
         makePatternButton();
@@ -76,12 +81,14 @@ public class MakerPanel {
         setPositions();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a base button that lets the user modify the cat's base colour
     private void makeBaseButton() {
         ImageView baseButtonImage = new ImageView();
         baseButtonImage.setImage(new Image("ui/images/system/BaseColour.png"));
         baseButton = new Button("", baseButtonImage);
         baseButton.setStyle("-fx-background-color: transparent;");
-        baseButton.setOnAction(event -> colourAction());
+        baseButton.setOnAction(event -> baseAction());
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         baseButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -90,6 +97,8 @@ public class MakerPanel {
                 event -> baseButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a pattern button that lets the user modify the cat's coat pattern
     private void makePatternButton() {
         ImageView patternButtonImage = new ImageView();
         patternButtonImage.setImage(new Image("ui/images/system/CoatPattern.png"));
@@ -104,6 +113,8 @@ public class MakerPanel {
                 event -> patternButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates an eyes button that lets the user modify the cat's eye colours
     private void makeEyesButton() {
         ImageView eyesButtonImage = new ImageView();
         eyesButtonImage.setImage(new Image("ui/images/system/EyeColour.png"));
@@ -118,6 +129,8 @@ public class MakerPanel {
                 event -> eyesButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a skin button that lets the user modify the cat's skin colour
     private void makeSkinButton() {
         ImageView skinButtonImage = new ImageView();
         skinButtonImage.setImage(new Image("ui/images/system/SkinColour.png"));
@@ -132,6 +145,8 @@ public class MakerPanel {
                 event -> skinButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates an accessories button that lets the user modify the cat's accessories
     private void makeAccessoriesButton() {
         ImageView accessoryButtonImage = new ImageView();
         accessoryButtonImage.setImage(new Image("ui/images/system/Accessories.png"));
@@ -146,6 +161,8 @@ public class MakerPanel {
                 event -> accessoriesButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a background button that lets the user modify the cat's background
     private void makeBackgroundButton() {
         ImageView backgroundButtonImage = new ImageView();
         backgroundButtonImage.setImage(new Image("ui/images/system/Background.png"));
@@ -160,6 +177,8 @@ public class MakerPanel {
                 event -> backgroundButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a flip button that lets the user flip the cat from left to right, and vice versa
     private void makeFlipButton() {
         ImageView flipButtonImage = new ImageView();
         flipButtonImage.setImage(new Image("ui/images/system/FlipDirection.png"));
@@ -174,6 +193,8 @@ public class MakerPanel {
                 event -> flipButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a save button that lets the user save the current cat to the current cat colletion file
     private void makeSaveButton() {
         ImageView saveButtonImage = new ImageView();
         saveButtonImage.setImage(new Image("ui/images/system/SaveCat.png"));
@@ -188,6 +209,8 @@ public class MakerPanel {
                 event -> saveButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a menu button that lets the user return to MenuPanel
     private void makeMenuButton() {
         ImageView menuButtonImage = new ImageView();
         menuButtonImage.setImage(new Image("ui/images/system/MenuScreen.png"));
@@ -202,6 +225,8 @@ public class MakerPanel {
                 event -> menuButton.setEffect(null));
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the buttons and divider to makerScreen at static locations
     private void setPositions() {
         makerScreen.getChildren().addAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
@@ -227,47 +252,63 @@ public class MakerPanel {
         menuButton.setTranslateY(225);
     }
 
-    private void colourAction() {
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with BaseAction
+    private void baseAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new BaseAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with PatternAction
     private void patternAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new PatternAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with EyesAction
     private void eyesAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new EyesAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with SkinAction
     private void skinAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new SkinAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with AccessoriesAction
     private void accessoriesAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new AccessoriesAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with BackgroundAction
     private void backgroundAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
         new BackgroundAction(currentStage, makerScreen, userCat, userCollection);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with FlipAction
     private void flipAction() {
         userCat.flipDirection();
         new CatModel(currentStage, makerScreen, userCat);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the buttons and divider and replaces them with SaveAction
     private void saveAction() {
         makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
@@ -286,6 +327,8 @@ public class MakerPanel {
         textField.setOnAction(event -> saveCommand(textField.getText(), saveBox));
     }
 
+    // MODIFIES: this
+    // EFFECTS: saves the current userCat to CAT_COLLECTION
     private void saveCommand(String name, VBox saveBox) {
         makerScreen.getChildren().remove(saveBox);
         userCat = updateCat(userCat);
@@ -303,6 +346,8 @@ public class MakerPanel {
         savedCommand();
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays a saved image and button to let the user know that the cat has been successfully saved
     private void savedCommand() {
         ImageView savedImage = new ImageView();
         savedImage.setImage(new Image("ui/images/system/Saved.png"));
@@ -323,6 +368,7 @@ public class MakerPanel {
         makerScreen.getChildren().addAll(savedBox);
     }
 
+    // EFFECTS: updates oldCat into a new Cat called newCat
     private Cat updateCat(Cat oldCat) {
         Cat newCat = new Cat();
         newCat.changeName(oldCat.getName());

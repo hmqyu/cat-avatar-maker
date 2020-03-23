@@ -12,15 +12,19 @@ import model.cat.Cat;
 import model.cat.CatCollection;
 import ui.CatModel;
 
+// Represents an action panel for a cat's coat pattern
 public class PatternAction extends MakerAction {
     public static final String[] PATTERNS = {"BlackTabby", "BrownTabby", "PointPattern", "RedTabby", "CreamTabby",
             "BlueTabby", "SilverTabby", "WhitePattern"};
 
+    // EFFECTS: creates an action panel that lets the user change a cat's coat pattern
     public PatternAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
         loadColourButtons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads and creates coat pattern buttons that let the user change the cat's coat pattern
     private void loadColourButtons() {
         int addY = -50;
         for (int count = 0; count < COLOURS.length; count++) {
@@ -47,6 +51,8 @@ public class PatternAction extends MakerAction {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the cat's coat pattern and updates the CatModel
     private void buttonAction(int colourNum) {
         userCat.changePattern(PATTERNS[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);
