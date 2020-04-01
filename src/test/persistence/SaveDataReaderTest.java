@@ -6,6 +6,7 @@ import model.cat.CatCollection;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ public class SaveDataReaderTest {
             assertEquals("pink", holly.getSkin());
             assertEquals("yellow", holly.getLeftEye());
             assertEquals("right", holly.getDirection());
-            assertEquals("no accessories", holly.getAllAccessories());
+            assertEquals(new ArrayList<>(), holly.getAccessories());
             assertEquals("empty", holly.getBackground());
         }
         catch (IOException | SaveDataException e) {
@@ -56,7 +57,7 @@ public class SaveDataReaderTest {
             assertEquals("pink", holly.getSkin());
             assertEquals("yellow", holly.getLeftEye());
             assertEquals("right", holly.getDirection());
-            assertEquals("no accessories", holly.getAllAccessories());
+            assertEquals(new ArrayList<>(), holly.getAccessories());
             assertEquals("empty", holly.getBackground());
 
             Cat heeny = collection.getCatFromCollection(1);
@@ -66,7 +67,9 @@ public class SaveDataReaderTest {
             assertEquals("pink", heeny.getSkin());
             assertEquals("copper", heeny.getLeftEye());
             assertEquals("right", heeny.getDirection());
-            assertEquals("a bag", heeny.getAllAccessories());
+            ArrayList<String> heenyAccessories = new ArrayList<>();
+            heenyAccessories.add("bag");
+            assertEquals(heenyAccessories, heeny.getAccessories());
             assertEquals("garden", heeny.getBackground());
 
             Cat al = collection.getCatFromCollection(2);
@@ -76,7 +79,10 @@ public class SaveDataReaderTest {
             assertEquals("mauve", al.getSkin());
             assertEquals("green", al.getLeftEye());
             assertEquals("left", al.getDirection());
-            assertEquals("horns, and an amulet", al.getAllAccessories());
+            ArrayList<String> alAccessories = new ArrayList<>();
+            alAccessories.add("horns");
+            alAccessories.add("amulet");
+            assertEquals(alAccessories, al.getAccessories());
             assertEquals("nighttime", al.getBackground());
         }
         catch (IOException | SaveDataException e) {

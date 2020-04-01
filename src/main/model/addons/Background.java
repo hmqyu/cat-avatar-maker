@@ -1,16 +1,9 @@
 package model.addons;
 
-// Represents different available backgrounds
+// Represents different available backgrounds for a cat
 public class Background {
-    private static final String EMPTY = "Empty";           // no background
-    private static final String HOME = "Home";             // home background
-    private static final String FOREST = "Forest";         // forest background
-    private static final String BEACH = "Beach";           // beach background
-    private static final String NIGHTTIME = "Nighttime";   // nighttime background
-
-    private static final String[] BACKGROUNDS = {EMPTY, HOME, FOREST, BEACH, NIGHTTIME};   // all usable backgrounds
-
-    private String background;   // the current background
+    private static final String EMPTY = "Empty";   // no/empty background
+    private String background;                     // the current background
 
     // EFFECTS: creates an empty background for an object
     public Background() {
@@ -23,16 +16,9 @@ public class Background {
     }
 
     // MODIFIES: this
-    // EFFECTS: changes the current background to the given one if in BACKGROUNDS, and returns true
-    //          otherwise, returns false
-    public boolean changeBackground(String background) {
-        for (String s : BACKGROUNDS) {
-            if (s.equals(background)) {
-                this.background = s;
-                return true;
-            }
-        }
-        return false;
+    // EFFECTS: changes the current background image to background
+    public void changeBackground(String background) {
+        this.background = background;
     }
 
     // EFFECTS: returns the current background
@@ -40,14 +26,4 @@ public class Background {
         return background;
     }
 
-    // MODIFIES: this
-    // EFFECTS: deletes the current background
-    public void deleteBackground() {
-        this.background = EMPTY;
-    }
-
-    // EFFECTS: returns true if the background is empty
-    public boolean noBackground() {
-        return background.equals(EMPTY);
-    }
 }

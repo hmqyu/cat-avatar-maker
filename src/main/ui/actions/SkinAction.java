@@ -14,7 +14,7 @@ import ui.CatModel;
 
 // Represents an action panel for a cat's skin colour
 public class SkinAction extends MakerAction {
-    public static final String[] SKIN = {"Pink", "Mauve", "Black"};   // all available skin colours for a cat
+    public static final String[] SKINS = {"Pink", "Mauve", "Black"};   // all available skin colours for a cat
 
     // EFFECTS: creates an action panel that lets the user change a cat's skin colour
     public SkinAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
@@ -26,9 +26,9 @@ public class SkinAction extends MakerAction {
     // EFFECTS: loads and creates skin colour buttons that let the user change the cat's skin colour
     private void loadColourButtons() {
         int addY = -50;
-        for (int count = 0; count < SKIN.length; count++) {
+        for (int count = 0; count < SKINS.length; count++) {
             ImageView buttonImage = new ImageView();
-            buttonImage.setImage(new Image("ui/images/system/skins/" + SKIN[count] + ".png"));
+            buttonImage.setImage(new Image("ui/images/system/skins/" + SKINS[count] + ".png"));
             Button button = new Button("", buttonImage);
             button.setStyle("-fx-background-color: transparent;");
             int finalCount = count;
@@ -53,7 +53,7 @@ public class SkinAction extends MakerAction {
     // MODIFIES: this
     // EFFECTS: changes the cat's skin colour and updates the CatModel
     private void buttonAction(int colourNum) {
-        userCat.changeSkin(SKIN[colourNum]);
+        userCat.changeSkin(SKINS[colourNum]);
         new CatModel(currentStage, makerScreen, userCat);
     }
 }

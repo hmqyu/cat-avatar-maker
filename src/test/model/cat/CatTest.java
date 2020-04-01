@@ -14,7 +14,6 @@ class CatTest {
     private Cat persistenceCat;
     private Cat changeDirectionCat;
     private Cat changeAccessoriesCat;
-    private Cat changeAccessoriesArticleCat;
     private Cat changeBackgroundCat;
     private Cat changeMultipleCat;
 
@@ -23,7 +22,6 @@ class CatTest {
         constructorCat = new Cat();
         changeDirectionCat = new Cat();
         changeAccessoriesCat = new Cat();
-        changeAccessoriesArticleCat = new Cat();
         changeBackgroundCat = new Cat();
 
         persistenceCat = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
@@ -48,7 +46,7 @@ class CatTest {
         assertEquals("Yellow", constructorCat.getLeftEye());
         assertEquals("Yellow", constructorCat.getRightEye());
         assertEquals("left", constructorCat.getDirection());
-        assertEquals("no accessories", constructorCat.getAllAccessories());
+        assertEquals(new ArrayList<>(), constructorCat.getAccessories());
         assertEquals("Empty", constructorCat.getBackground());
     }
 
@@ -61,7 +59,7 @@ class CatTest {
         assertEquals("copper", persistenceCat.getLeftEye());
         assertEquals("copper", persistenceCat.getRightEye());
         assertEquals("right", persistenceCat.getDirection());
-        assertEquals("no accessories", persistenceCat.getAllAccessories());
+        assertEquals(new ArrayList<>(), persistenceCat.getAccessories());
         assertEquals("Nighttime", persistenceCat.getBackground());
     }
 
@@ -84,82 +82,49 @@ class CatTest {
     @Test
     void testAccessories() {
         ArrayList<String> testAccessoriesList = new ArrayList<>();
-        assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
 
         assertTrue(changeAccessoriesCat.addAccessory("hat"));
         assertTrue(changeAccessoriesCat.addAccessory("scarf"));
         assertTrue(changeAccessoriesCat.addAccessory("bag"));
         assertTrue(changeAccessoriesCat.addAccessory("wings"));
-        assertEquals("a hat, a scarf, a bag, and wings", changeAccessoriesCat.getAllAccessories());
         testAccessoriesList.add("hat");
         testAccessoriesList.add("scarf");
         testAccessoriesList.add("bag");
         testAccessoriesList.add("wings");
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
 
         assertFalse(changeAccessoriesCat.addAccessory("hat"));
         assertFalse(changeAccessoriesCat.addAccessory("scarf"));
-        assertEquals("a hat, a scarf, a bag, and wings", changeAccessoriesCat.getAllAccessories());
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
 
         assertTrue(changeAccessoriesCat.removeAccessory("hat"));
         assertTrue(changeAccessoriesCat.removeAccessory("wings"));
         assertTrue(changeAccessoriesCat.removeAccessory("scarf"));
-        assertEquals("a bag", changeAccessoriesCat.getAllAccessories());
         testAccessoriesList.remove("hat");
         testAccessoriesList.remove("scarf");
         testAccessoriesList.remove("wings");
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
 
         assertFalse(changeAccessoriesCat.removeAccessory("hat"));
         assertFalse(changeAccessoriesCat.removeAccessory("tomato"));
-        assertEquals("a bag", changeAccessoriesCat.getAllAccessories());
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
 
         assertTrue(changeAccessoriesCat.addAccessory("amulet"));
-        assertEquals("a bag, and an amulet", changeAccessoriesCat.getAllAccessories());
         testAccessoriesList.add("amulet");
-        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessoriesList());
-
-        changeAccessoriesCat.removeAllAccessories();
-        assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
-        assertEquals(new ArrayList<String>(), changeAccessoriesCat.getAccessoriesList());
-        constructorCat.removeAllAccessories();
-        assertEquals("no accessories", changeAccessoriesCat.getAllAccessories());
-        assertEquals(new ArrayList<String>(), changeAccessoriesCat.getAccessoriesList());
-
-        // testing addArticle
-        changeAccessoriesArticleCat.addAccessory("apron");
-        changeAccessoriesArticleCat.addAccessory("earring stud");
-        changeAccessoriesArticleCat.addAccessory("ivory brooch");
-        changeAccessoriesArticleCat.addAccessory("overcoat");
-        changeAccessoriesArticleCat.addAccessory("undershirt");
-        changeAccessoriesArticleCat.addAccessory("wool sweater");
-        changeAccessoriesArticleCat.addAccessory("glasses");
-        assertEquals("an apron, an earring stud, an ivory brooch, an overcoat, an undershirt," +
-                " a wool sweater, and glasses", changeAccessoriesArticleCat.getAllAccessories());
+        assertEquals(testAccessoriesList, changeAccessoriesCat.getAccessories());
     }
 
     @Test
     void testBackground() {
-        assertTrue(changeBackgroundCat.emptyBackground());
-
-        assertTrue(changeBackgroundCat.changeBackground("Forest"));
+        changeBackgroundCat.changeBackground("Forest");
         assertEquals("Forest", changeBackgroundCat.getBackground());
-        assertFalse(changeBackgroundCat.emptyBackground());
 
-        assertTrue(changeBackgroundCat.changeBackground("Nighttime"));
+        changeBackgroundCat.changeBackground("Nighttime");
         assertEquals("Nighttime", changeBackgroundCat.getBackground());
-        assertFalse(changeBackgroundCat.emptyBackground());
 
-        assertFalse(changeBackgroundCat.changeBackground("City"));
-        assertEquals("Nighttime", changeBackgroundCat.getBackground());
-        assertFalse(changeBackgroundCat.emptyBackground());
-
-        changeBackgroundCat.removeBackground();
-        assertEquals("Empty", changeBackgroundCat.getBackground());
-        assertTrue(changeBackgroundCat.emptyBackground());
+        changeBackgroundCat.changeBackground("city");
+        assertEquals("city", changeBackgroundCat.getBackground());
     }
 
 }

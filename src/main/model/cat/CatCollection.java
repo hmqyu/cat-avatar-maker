@@ -25,11 +25,6 @@ public class CatCollection implements SaveData {
         collection.add(cat);
     }
 
-    // EFFECTS: returns the number of Cats in collection
-    public int numOfCats() {
-        return collection.size();
-    }
-
     // REQUIRES: num < collection.size()
     // EFFECTS: returns the Cat at given index in collection
     public Cat getCatFromCollection(int num) {

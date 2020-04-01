@@ -1,17 +1,12 @@
 package ui;
 
 import javafx.geometry.Pos;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import model.addons.Accessory;
-import model.addons.Background;
 import model.cat.Cat;
-import model.cat.CatDirection;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Represents a cat avatar
@@ -122,7 +117,7 @@ public class CatModel {
     // MODIFIES: this
     // EFFECTS: creates and renders the cat's accessories' images
     protected void renderAccessories() {
-        ArrayList<String> accessoriesList = userCat.getAccessoriesList();
+        ArrayList<String> accessoriesList = userCat.getAccessories();
         for (String accessory : accessoriesList) {
             ImageView accessoryImage = new ImageView();
             accessoryImage.setImage(new Image("ui/images/accessories/" + accessory + ".png"));

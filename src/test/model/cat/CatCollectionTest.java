@@ -61,16 +61,13 @@ public class CatCollectionTest {
 
     @Test
     void testOneInCollection() {
-        assertEquals(1, oneCatC.numOfCats());
         assertEquals(holly, oneCatC.getCatFromCollection(0));
 
         oneCatC.addToCollection(al);
-        assertEquals(2, oneCatC.numOfCats());
         assertEquals(holly, oneCatC.getCatFromCollection(0));
         assertEquals(al, oneCatC.getCatFromCollection(1));
 
         oneCatC.addToCollection(heeny);
-        assertEquals(3, oneCatC.numOfCats());
         assertEquals(holly, oneCatC.getCatFromCollection(0));
         assertEquals(al, oneCatC.getCatFromCollection(1));
         assertEquals(heeny, oneCatC.getCatFromCollection(2));
@@ -78,7 +75,6 @@ public class CatCollectionTest {
 
     @Test
     void testMultipleInCollection() {
-        assertEquals(3, multiCatC.numOfCats());
         assertEquals(holly, multiCatC.getCatFromCollection(0));
         assertEquals(heeny, multiCatC.getCatFromCollection(1));
         assertEquals(al, multiCatC.getCatFromCollection(2));

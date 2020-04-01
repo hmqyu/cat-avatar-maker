@@ -26,7 +26,7 @@ import java.io.UnsupportedEncodingException;
 public class MakerPanel {
     public static final int WIDTH = 650;                                       // width of the stage
     public static final int HEIGHT = 500;                                      // height of the stage
-    private static final int BUTTON_X_COORD = 390;                             // x-coordinate of the menu buttons
+    public static final int BUTTON_X_COORD = 390;                             // x-coordinate of the menu buttons
 
     private static final String CAT_COLLECTION = "./data/CatCollection.txt";   // text file to store the cat collection
     private CatCollection userCollection;                                      // the user's current cat collection
@@ -343,12 +343,12 @@ public class MakerPanel {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        savedCommand();
+        finishedSavingCommand();
     }
 
     // MODIFIES: this
     // EFFECTS: displays a saved image and button to let the user know that the cat has been successfully saved
-    private void savedCommand() {
+    private void finishedSavingCommand() {
         ImageView savedImage = new ImageView();
         savedImage.setImage(new Image("ui/images/system/Saved.png"));
         ImageView buttonImage = new ImageView();
@@ -378,8 +378,8 @@ public class MakerPanel {
         newCat.changeRightEye(oldCat.getRightEye());
         newCat.changeSkin(oldCat.getSkin());
         newCat.changeBackground(oldCat.getBackground());
-        for (int i = 0; i < oldCat.getAccessoriesList().size(); i++) {
-            newCat.addAccessory(oldCat.getAccessoriesList().get(i));
+        for (int i = 0; i < oldCat.getAccessories().size(); i++) {
+            newCat.addAccessory(oldCat.getAccessories().get(i));
         }
         return newCat;
     }

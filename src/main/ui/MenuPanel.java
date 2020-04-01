@@ -22,9 +22,6 @@ import java.io.IOException;
 
 // Represents the "intro" menu screen for the Cat Maker
 public class MenuPanel {
-    public static final int WIDTH = 650;    // width of the stage
-    public static final int HEIGHT = 500;   // height of the stage
-
     private static final String CAT_COLLECTION = "./data/CatCollection.txt";   // text file to store the cat collection
     private CatCollection collection;   // the user's current cat collection
     private Cat userCat;   // the user's current cat
@@ -46,7 +43,7 @@ public class MenuPanel {
         loadMenuButtons();
         menuScreen.setStyle("-fx-background-color: #f5efed");
         currentStage = stage;
-        currentStage.setScene(new Scene(menuScreen, WIDTH, HEIGHT));
+        currentStage.setScene(new Scene(menuScreen, MakerPanel.WIDTH, MakerPanel.HEIGHT));
         currentStage.show();
     }
 

@@ -23,6 +23,7 @@ public class SaveDataWriterTest {
     private Cat catArrayTester1 = new Cat("Heeny", "red", "tabby", "pink", "copper", "copper",
             new CatDirection("right"), new Accessory(),
             new Background("nighttime"));
+    private ArrayList<String> cat1Accessories = new ArrayList<>();
     private Cat catArrayTester2 = new Cat("Holly", "brown", "tabby", "black", "green", "green",
             new CatDirection("left"), new Accessory(),
             new Background("city"));
@@ -39,6 +40,9 @@ public class SaveDataWriterTest {
         catArrayTester1.addAccessory("bag");
         catArrayTester1.addAccessory("amulet");
         catArrayTester1.addAccessory("wings");
+        cat1Accessories.add("bag");
+        cat1Accessories.add("amulet");
+        cat1Accessories.add("wings");
 
         catArrayListTester.add(catArrayTester1);
         catArrayListTester.add(catArrayTester2);
@@ -61,7 +65,7 @@ public class SaveDataWriterTest {
             assertEquals("pink", heeny.getSkin());
             assertEquals("copper", heeny.getLeftEye());
             assertEquals("right", heeny.getDirection());
-            assertEquals("a bag, an amulet, and wings", heeny.getAllAccessories());
+            assertEquals(cat1Accessories, heeny.getAccessories());
             assertEquals("nighttime", heeny.getBackground());
 
             Cat holly = collection.getCatFromCollection(1);
@@ -71,7 +75,7 @@ public class SaveDataWriterTest {
             assertEquals("black", holly.getSkin());
             assertEquals("green", holly.getLeftEye());
             assertEquals("left", holly.getDirection());
-            assertEquals("no accessories", holly.getAllAccessories());
+            assertEquals(new ArrayList<>(), holly.getAccessories());
             assertEquals("city", holly.getBackground());
 
             Cat yourCat = collection.getCatFromCollection(2);
@@ -81,7 +85,7 @@ public class SaveDataWriterTest {
             assertEquals("Pink", yourCat.getSkin());
             assertEquals("Yellow", yourCat.getLeftEye());
             assertEquals("left", yourCat.getDirection());
-            assertEquals("no accessories", yourCat.getAllAccessories());
+            assertEquals(new ArrayList<>(), yourCat.getAccessories());
             assertEquals("Empty", yourCat.getBackground());
         } catch (IOException | SaveDataException e) {
             fail("IOException and/or SaveDataException shouldn't be thrown.");

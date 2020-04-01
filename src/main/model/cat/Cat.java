@@ -7,6 +7,7 @@ import persistence.SaveDataReader;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents a cat with a name, base colour, coat pattern, nose colour,
 // eye colour, direction, any accessories, and a background
@@ -141,66 +142,15 @@ public class Cat implements SaveData {
         return this.accessories.removeAccessory(accessory);
     }
 
-    // MODIFIES: this
-    // EFFECTS: removes all accessories from a cat
-    public void removeAllAccessories() {
-        this.accessories.removeAllAccessories();
-    }
-
-    // EFFECTS: if the cat has no accessories, returns "no accessories"
-    //          otherwise, returns the cat's current accessories
-    public String getAllAccessories() {
-        ArrayList<String> accessoriesArray = accessories.getAllAccessories();
-        if (accessoriesArray.isEmpty()) {
-            return "no accessories";
-        } else if (accessoriesArray.size() == 1) {
-            return addArticle(accessoriesArray.get(0));
-        }
-        String accessoriesString = "";
-        int count;
-        for (count = 0; count < accessoriesArray.size() - 1; count++) {
-            accessoriesString += addArticle(accessoriesArray.get(count)) + ", ";
-        }
-        accessoriesString += "and " + addArticle(accessoriesArray.get(count));
-        return accessoriesString;
-    }
-
     // EFFECTS: returns the ArrayList<String> within accessories
-    public ArrayList<String> getAccessoriesList() {
+    public ArrayList<String> getAccessories() {
         return accessories.getAllAccessories();
     }
 
-    // EFFECTS: returns word with its correct indefinite article
-    private String addArticle(String word) {
-        String firstLetter = word.substring(0, 1);
-        String lastLetter = word.substring(word.length() - 1);
-        String article = "a ";
-        if (firstLetter.equals("a") || firstLetter.equals("e") || firstLetter.equals("i")
-                || firstLetter.equals("o") || firstLetter.equals("u")) {
-            article = "an ";
-        }
-        if (lastLetter.equals("s")) {
-            article = "";
-        }
-        return article + word;
-    }
-
     // MODIFIES: this
-    // EFFECTS: if background is available, changes the background of a cat and returns true
-    //          otherwise, returns false
-    public boolean changeBackground(String background) {
-        return this.background.changeBackground(background);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the cat's background
-    public void removeBackground() {
-        this.background.deleteBackground();
-    }
-
-    // EFFECTS: returns true if the cat's background is empty
-    public boolean emptyBackground() {
-        return background.noBackground();
+    // EFFECTS: changes the background image of a cat to background
+    public void changeBackground(String background) {
+        this.background.changeBackground(background);
     }
 
     // EFFECTS: returns the cat's current background
@@ -232,7 +182,7 @@ public class Cat implements SaveData {
 
     // EFFECTS: saves all of a cat's accessories (if any) to a file
     private void saveAccessory(PrintWriter printWriter) {
-        ArrayList<String> currentAccessories = accessories.getAllAccessories();
+        List<String> currentAccessories = accessories.getAllAccessories();
         if (currentAccessories.isEmpty()) {
             return;
         }
