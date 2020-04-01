@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.SaveDataException;
 import model.cat.Cat;
 import model.cat.CatCollection;
 import java.io.File;
@@ -38,8 +39,8 @@ public class SaveDataReaderTest {
             assertEquals("no accessories", holly.getAllAccessories());
             assertEquals("empty", holly.getBackground());
         }
-        catch (IOException e) {
-            fail("IOException shouldn't be thrown.");
+        catch (IOException | SaveDataException e) {
+            fail("IOException and/or SaveDataException shouldn't be thrown.");
         }
     }
 
@@ -78,8 +79,8 @@ public class SaveDataReaderTest {
             assertEquals("horns, and an amulet", al.getAllAccessories());
             assertEquals("nighttime", al.getBackground());
         }
-        catch (IOException e) {
-            fail("IOException shouldn't be thrown.");
+        catch (IOException | SaveDataException e) {
+            fail("IOException and/or SaveDataException shouldn't be thrown.");
         }
     }
 
@@ -87,8 +88,21 @@ public class SaveDataReaderTest {
     void testIOException() {
         try {
             SaveDataReader.readCollection(new File("./no/path/here/testCollection.txt"));
+        } catch (SaveDataException e) {
+            fail("SaveDataException shouldn't be thrown.");
         } catch (IOException e) {
             // expected IOException
+        }
+    }
+
+    @Test
+    void testSaveDataException() {
+        try {
+            SaveDataReader.readCollection(new File("./data/testSaveFileException.txt"));
+        } catch (IOException e) {
+            fail("IOException shouldn't be thrown.");
+        } catch (SaveDataException e) {
+            // expected SaveFileException
         }
     }
 }

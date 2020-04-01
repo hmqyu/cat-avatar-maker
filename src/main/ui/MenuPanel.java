@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.SaveDataException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -145,6 +146,9 @@ public class MenuPanel {
             collection = SaveDataReader.readCollection(new File(CAT_COLLECTION));
         } catch (IOException e) {
             System.out.println("No collection found. Creating new collection...");
+            collection = new CatCollection();
+        } catch (SaveDataException e) {
+            System.out.println("Corrupt save file found - new collection must be created. Creating new collection...");
             collection = new CatCollection();
         }
     }

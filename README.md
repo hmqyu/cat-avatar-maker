@@ -42,3 +42,19 @@ demonstrate both of my skills (while also showing my love for cats!).
   
 (Currently, there is one Easter egg implemented. Hint: blue eye.)
 <br>(There's also one "Easter egg" in the files, but is not present in the actual application.)
+
+## Phase 4: Task 2
+
+I have decided to go with the "**Test and Design a Class That is Robust**" option.
+
+The method that throws an exception is called parseCat. It is located in the SaveDataReader
+class, starting at line 77 (the exception is thrown at line 90). I did this because I thought
+it would be a good idea to check if the save data was corrupt or not (eg. something was not
+written correctly, the user purposely modified the text file where the data is stored, etc.). 
+It is very useful when debugging the code, as it indicates there's an issue with the save
+data that is being written rather than something else (eg. another array that deals with 
+displaying accessories in the GUI).
+
+This method is tested in the SaveDataReaderTest class. It is tested throughout all the tests, 
+including a specific test where the exception is expected to occur. This test is called 
+testSaveDataException and begins at line 99.

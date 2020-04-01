@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.SaveDataException;
 import model.addons.Accessory;
 import model.addons.Background;
 import model.cat.Cat;
@@ -82,8 +83,8 @@ public class SaveDataWriterTest {
             assertEquals("left", yourCat.getDirection());
             assertEquals("no accessories", yourCat.getAllAccessories());
             assertEquals("Empty", yourCat.getBackground());
-        } catch (IOException e) {
-            fail("IOException shouldn't be thrown.");
+        } catch (IOException | SaveDataException e) {
+            fail("IOException and/or SaveDataException shouldn't be thrown.");
         }
     }
 }

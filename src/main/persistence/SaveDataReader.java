@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.SaveDataException;
 import model.addons.Accessory;
 import model.addons.Background;
 import model.cat.Cat;
@@ -32,7 +33,7 @@ public class SaveDataReader {
 
     // EFFECTS: returns a CatCollection parsed from file
     //          IOException is thrown if an exception occurs when opening/reading file
-    public static CatCollection readCollection(File file) throws IOException {
+    public static CatCollection readCollection(File file) throws IOException, SaveDataException {
         List<String> collectionFile = readFile(file);
         return new CatCollection(parseData(collectionFile));
     }
@@ -45,7 +46,7 @@ public class SaveDataReader {
 
     // EFFECTS: returns a list of Cat parsed from a list of String
     //          each String represents the data for a Cat
-    private static ArrayList<Cat> parseData(List<String> file) {
+    private static ArrayList<Cat> parseData(List<String> file) throws SaveDataException {
         ArrayList<Cat> cats = new ArrayList<>();
 
         for (String line : file) {
@@ -73,16 +74,21 @@ public class SaveDataReader {
     //           element 7 represents a cat's accessories (if any)
     //           element 8 represents a cat's background (if any)
     // EFFECTS: returns a Cat created from the data in fields
-    private static Cat parseCat(List<String> fields) {
-        String name = fields.get(0);
-        String base = fields.get(1);
-        String pattern = fields.get(2);
-        String skin = fields.get(3);
-        String leftEye = fields.get(4);
-        String rightEye = fields.get(5);
-        CatDirection direction = new CatDirection(fields.get(6));
-        Accessory accessories = new Accessory(splitter(fields.get(7), ACCESSORY_DELIMITER));
-        Background background = new Background(fields.get(8));
-        return new Cat(name, base, pattern, skin, leftEye, rightEye, direction, accessories, background);
+    //          throws new SaveDataException if IndexOutOfBoundsException is caught (ie. data cannot be parsed)
+    private static Cat parseCat(List<String> fields) throws SaveDataException {
+        try {
+            String name = fields.get(0);
+            String base = fields.get(1);
+            String pattern = fields.get(2);
+            String skin = fields.get(3);
+            String leftEye = fields.get(4);
+            String rightEye = fields.get(5);
+            CatDirection direction = new CatDirection(fields.get(6));
+            Accessory accessories = new Accessory(splitter(fields.get(7), ACCESSORY_DELIMITER));
+            Background background = new Background(fields.get(8));
+            return new Cat(name, base, pattern, skin, leftEye, rightEye, direction, accessories, background);
+        } catch (IndexOutOfBoundsException e) {
+            throw new SaveDataException();
+        }
     }
 }
