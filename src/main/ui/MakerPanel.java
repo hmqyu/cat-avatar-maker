@@ -5,13 +5,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
@@ -24,16 +21,13 @@ import java.io.UnsupportedEncodingException;
 
 // Represents an interactive cat avatar maker
 public class MakerPanel {
-    public static final int WIDTH = 650;                                       // width of the stage
-    public static final int HEIGHT = 500;                                      // height of the stage
-    public static final int BUTTON_X_COORD = 390;                             // x-coordinate of the menu buttons
-
+    public static final int BUTTON_X_POS = MenuPanel.BUTTON_X_POS;             // x-coordinate of the menu buttons
     private static final String CAT_COLLECTION = "./data/CatCollection.txt";   // text file to store the cat collection
-    private CatCollection userCollection;                                      // the user's current cat collection
 
     private Stage currentStage;                                                // the current stage
     private StackPane makerScreen;                                             // the maker screen
     private Cat userCat;                                                       // the user's current cat
+    private CatCollection userCollection;                                      // the user's current cat collection
     private Button baseButton;                                                 // the base colour button
     private Button patternButton;                                              // the coat pattern button
     private Button eyesButton;                                                 // the eye colour button
@@ -53,265 +47,106 @@ public class MakerPanel {
     public MakerPanel(Stage stage, Cat cat, CatCollection collection) {
         currentStage = stage;
         makerScreen = new StackPane();
+        makerScreen.setStyle("-fx-background-color: " + MenuPanel.BG_COLOUR);
         new CatModel(currentStage, makerScreen, cat);
         userCat = cat;
         userCollection = collection;
         loadMakerButtons();
-        makerScreen.setStyle("-fx-background-color: #f5efed");
         currentStage = stage;
-        currentStage.setScene(new Scene(makerScreen, WIDTH, HEIGHT));
+        currentStage.setScene(new Scene(makerScreen, MenuPanel.WIDTH, MenuPanel.HEIGHT));
         currentStage.show();
     }
 
     // MODIFIES: this
-    // EFFECTS: loads the base, pattern, eyes, skin, flip, accessories, background, save, and menu buttons, as well as
-    //          the divider
+    // EFFECTS: creates and loads the base, pattern, eyes, skin, flip, accessories, background, save, and menu buttons,
+    //          as well as the divider to separate buttons based on functionality
     private void loadMakerButtons() {
-        makeBaseButton();
-        makePatternButton();
-        makeEyesButton();
-        makeSkinButton();
-        makeAccessoriesButton();
-        makeBackgroundButton();
-        makeFlipButton();
-        makeSaveButton();
-        makeMenuButton();
+        baseButton = (new ButtonVisualsMaker("system/BaseColour")).getButton();
+        patternButton = (new ButtonVisualsMaker("system/CoatPattern")).getButton();
+        eyesButton = (new ButtonVisualsMaker("system/EyeColour")).getButton();
+        skinButton = (new ButtonVisualsMaker("system/SkinColour")).getButton();
+        accessoriesButton = (new ButtonVisualsMaker("system/Accessories")).getButton();
+        backgroundButton = (new ButtonVisualsMaker("system/Background")).getButton();
+        flipButton = (new ButtonVisualsMaker("system/FlipDirection")).getButton();
+        saveButton = (new ButtonVisualsMaker("system/SaveCat")).getButton();
+        menuButton = (new ButtonVisualsMaker("system/MenuScreen")).getButton();
         divider = new ImageView();
         divider.setImage(new Image("ui/images/system/Divider.png"));
+        setButtonActions();
         setPositions();
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a base button that lets the user modify the cat's base colour
-    private void makeBaseButton() {
-        ImageView baseButtonImage = new ImageView();
-        baseButtonImage.setImage(new Image("ui/images/system/BaseColour.png"));
-        baseButton = new Button("", baseButtonImage);
-        baseButton.setStyle("-fx-background-color: transparent;");
-        baseButton.setOnAction(event -> baseAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        baseButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> baseButton.setEffect(shadow));
-        baseButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> baseButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a pattern button that lets the user modify the cat's coat pattern
-    private void makePatternButton() {
-        ImageView patternButtonImage = new ImageView();
-        patternButtonImage.setImage(new Image("ui/images/system/CoatPattern.png"));
-        patternButton = new Button("", patternButtonImage);
-        patternButton.setStyle("-fx-background-color: transparent;");
-        patternButton.setOnAction(event -> patternAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        patternButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> patternButton.setEffect(shadow));
-        patternButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> patternButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates an eyes button that lets the user modify the cat's eye colours
-    private void makeEyesButton() {
-        ImageView eyesButtonImage = new ImageView();
-        eyesButtonImage.setImage(new Image("ui/images/system/EyeColour.png"));
-        eyesButton = new Button("", eyesButtonImage);
-        eyesButton.setStyle("-fx-background-color: transparent;");
-        eyesButton.setOnAction(event -> eyesAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        eyesButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> eyesButton.setEffect(shadow));
-        eyesButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> eyesButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a skin button that lets the user modify the cat's skin colour
-    private void makeSkinButton() {
-        ImageView skinButtonImage = new ImageView();
-        skinButtonImage.setImage(new Image("ui/images/system/SkinColour.png"));
-        skinButton = new Button("", skinButtonImage);
-        skinButton.setStyle("-fx-background-color: transparent;");
-        skinButton.setOnAction(event -> skinAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        skinButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> skinButton.setEffect(shadow));
-        skinButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> skinButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates an accessories button that lets the user modify the cat's accessories
-    private void makeAccessoriesButton() {
-        ImageView accessoryButtonImage = new ImageView();
-        accessoryButtonImage.setImage(new Image("ui/images/system/Accessories.png"));
-        accessoriesButton = new Button("", accessoryButtonImage);
-        accessoriesButton.setStyle("-fx-background-color: transparent;");
-        accessoriesButton.setOnAction(event -> accessoriesAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        accessoriesButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> accessoriesButton.setEffect(shadow));
-        accessoriesButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> accessoriesButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a background button that lets the user modify the cat's background
-    private void makeBackgroundButton() {
-        ImageView backgroundButtonImage = new ImageView();
-        backgroundButtonImage.setImage(new Image("ui/images/system/Background.png"));
-        backgroundButton = new Button("", backgroundButtonImage);
-        backgroundButton.setStyle("-fx-background-color: transparent;");
-        backgroundButton.setOnAction(event -> backgroundAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        backgroundButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> backgroundButton.setEffect(shadow));
-        backgroundButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> backgroundButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a flip button that lets the user flip the cat from left to right, and vice versa
-    private void makeFlipButton() {
-        ImageView flipButtonImage = new ImageView();
-        flipButtonImage.setImage(new Image("ui/images/system/FlipDirection.png"));
-        flipButton = new Button("", flipButtonImage);
-        flipButton.setStyle("-fx-background-color: transparent;");
+    // EFFECTS: sets respective on click action events for all buttons in MakerPanel
+    private void setButtonActions() {
+        baseButton.setOnAction(event -> {
+            removeMakerButtons();
+            new BaseAction(currentStage, makerScreen, userCat, userCollection); });
+        patternButton.setOnAction(event -> {
+            removeMakerButtons();
+            new PatternAction(currentStage, makerScreen, userCat, userCollection); });
+        eyesButton.setOnAction(event -> {
+            removeMakerButtons();
+            new EyesAction(currentStage, makerScreen, userCat, userCollection); });
+        skinButton.setOnAction(event -> {
+            removeMakerButtons();
+            new SkinAction(currentStage, makerScreen, userCat, userCollection); });
+        accessoriesButton.setOnAction(event -> {
+            removeMakerButtons();
+            new AccessoriesAction(currentStage, makerScreen, userCat, userCollection); });
+        backgroundButton.setOnAction(event -> {
+            removeMakerButtons();
+            new BackgroundAction(currentStage, makerScreen, userCat, userCollection); });
         flipButton.setOnAction(event -> flipAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        flipButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> flipButton.setEffect(shadow));
-        flipButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> flipButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a save button that lets the user save the current cat to the current cat colletion file
-    private void makeSaveButton() {
-        ImageView saveButtonImage = new ImageView();
-        saveButtonImage.setImage(new Image("ui/images/system/SaveCat.png"));
-        saveButton = new Button("", saveButtonImage);
-        saveButton.setStyle("-fx-background-color: transparent;");
         saveButton.setOnAction(event -> saveAction());
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        saveButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> saveButton.setEffect(shadow));
-        saveButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> saveButton.setEffect(null));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a menu button that lets the user return to MenuPanel
-    private void makeMenuButton() {
-        ImageView menuButtonImage = new ImageView();
-        menuButtonImage.setImage(new Image("ui/images/system/MenuScreen.png"));
-        menuButton = new Button("", menuButtonImage);
-        menuButton.setStyle("-fx-background-color: transparent;");
         menuButton.setOnAction(event -> new MenuPanel(currentStage, userCat));
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        menuButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> menuButton.setEffect(shadow));
-        menuButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> menuButton.setEffect(null));
     }
 
     // MODIFIES: this
-    // EFFECTS: adds the buttons and divider to makerScreen at static locations
+    // EFFECTS: removes all MakerPanel buttons and the divider from the MakerPanel
+    private void removeMakerButtons() {
+        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
+                backgroundButton, flipButton, divider, saveButton, menuButton);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds all MakerPanel buttons and divider to makerScreen at static locations
     private void setPositions() {
         makerScreen.getChildren().addAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
                 backgroundButton, flipButton, divider, saveButton, menuButton);
-        baseButton.setTranslateX(BUTTON_X_COORD);
+        baseButton.setTranslateX(BUTTON_X_POS);
         baseButton.setTranslateY(-225);
-        patternButton.setTranslateX(BUTTON_X_COORD);
+        patternButton.setTranslateX(BUTTON_X_POS);
         patternButton.setTranslateY(-175);
-        eyesButton.setTranslateX(BUTTON_X_COORD);
+        eyesButton.setTranslateX(BUTTON_X_POS);
         eyesButton.setTranslateY(-125);
-        skinButton.setTranslateX(BUTTON_X_COORD);
+        skinButton.setTranslateX(BUTTON_X_POS);
         skinButton.setTranslateY(-75);
-        accessoriesButton.setTranslateX(BUTTON_X_COORD);
+        accessoriesButton.setTranslateX(BUTTON_X_POS);
         accessoriesButton.setTranslateY(-25);
-        backgroundButton.setTranslateX(BUTTON_X_COORD);
+        backgroundButton.setTranslateX(BUTTON_X_POS);
         backgroundButton.setTranslateY(25);
-        flipButton.setTranslateX(BUTTON_X_COORD);
+        flipButton.setTranslateX(BUTTON_X_POS);
         flipButton.setTranslateY(75);
-        divider.setTranslateX(BUTTON_X_COORD + 10);
+        divider.setTranslateX(BUTTON_X_POS + 10);
         divider.setTranslateY(125);
-        saveButton.setTranslateX(BUTTON_X_COORD);
+        saveButton.setTranslateX(BUTTON_X_POS);
         saveButton.setTranslateY(175);
-        menuButton.setTranslateX(BUTTON_X_COORD);
+        menuButton.setTranslateX(BUTTON_X_POS);
         menuButton.setTranslateY(225);
     }
 
     // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with BaseAction
-    private void baseAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new BaseAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with PatternAction
-    private void patternAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new PatternAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with EyesAction
-    private void eyesAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new EyesAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with SkinAction
-    private void skinAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new SkinAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with AccessoriesAction
-    private void accessoriesAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new AccessoriesAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with BackgroundAction
-    private void backgroundAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
-        new BackgroundAction(currentStage, makerScreen, userCat, userCollection);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with FlipAction
+    // EFFECTS: flips the current cat's direction and updates the model
     private void flipAction() {
         userCat.flipDirection();
         new CatModel(currentStage, makerScreen, userCat);
     }
 
     // MODIFIES: this
-    // EFFECTS: removes the buttons and divider and replaces them with SaveAction
+    // EFFECTS: removes the buttons and divider; allows the user to name and thus save their cat
     private void saveAction() {
-        makerScreen.getChildren().removeAll(baseButton, patternButton, eyesButton, skinButton, accessoriesButton,
-                backgroundButton, flipButton, divider, saveButton, menuButton);
+        removeMakerButtons();
         ImageView nameImage = new ImageView();
         nameImage.setImage(new Image("ui/images/system/NameTheCat.png"));
         TextField textField = new TextField();
@@ -351,17 +186,8 @@ public class MakerPanel {
     private void finishedSavingCommand() {
         ImageView savedImage = new ImageView();
         savedImage.setImage(new Image("ui/images/system/Saved.png"));
-        ImageView buttonImage = new ImageView();
-        buttonImage.setImage(new Image("ui/images/system/SmallerOkayButton.png"));
-        Button button = new Button("", buttonImage);
-        button.setStyle("-fx-background-color: transparent;");
+        Button button = (new ButtonVisualsMaker("system/SmallerOkayButton")).getButton();
         button.setOnAction(event -> new MakerPanel(currentStage, userCat, userCollection));
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> button.setEffect(shadow));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> button.setEffect(null));
         VBox savedBox = new VBox(10);
         savedBox.getChildren().addAll(savedImage, button);
         savedBox.setAlignment(Pos.CENTER_RIGHT);
@@ -381,6 +207,10 @@ public class MakerPanel {
         for (int i = 0; i < oldCat.getAccessories().size(); i++) {
             newCat.addAccessory(oldCat.getAccessories().get(i));
         }
+        if (oldCat.getDirection().equals("right")) {
+            newCat.flipDirection();
+        }
         return newCat;
     }
+
 }

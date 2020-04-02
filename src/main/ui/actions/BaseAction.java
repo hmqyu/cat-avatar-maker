@@ -10,49 +10,35 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
+import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's skin colour
+// Represents an action panel for a cat's base colour
 public class BaseAction extends MakerAction {
+    protected static final String[] BASES = {"Black", "Brown", "Tortoiseshell", "Red", "Cream", "Blue", "Silver",
+            "White"};   // all available base colours for a cat
 
     // EFFECTS: creates an action panel that lets the user change a cat's base colour
     public BaseAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
-        loadColourButtons();
     }
 
     // MODIFIES: this
     // EFFECTS: loads and creates base colour buttons that let the user change the cat's base colour
-    private void loadColourButtons() {
-        int addY = -50;
-        for (int count = 0; count < COLOURS.length; count++) {
-            ImageView buttonImage = new ImageView();
-            buttonImage.setImage(new Image("ui/images/system/colours/" + COLOURS[count] + ".png"));
-            Button button = new Button("", buttonImage);
-            button.setStyle("-fx-background-color: transparent;");
+    protected void loadColourButtons() {
+        newYPos = BUTTON_Y_POS;
+        for (int count = 0; count < BASES.length; count++) {
+            Button button = (new ButtonVisualsMaker("system/colours/" + BASES[count])).getButton();
             int finalCount = count;
             button.setOnAction(event -> buttonAction(finalCount));
-            DropShadow shadow = new DropShadow();
-            shadow.setColor(Color.web("0xc98d92"));
-            button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    event -> button.setEffect(shadow));
-            button.addEventHandler(MouseEvent.MOUSE_EXITED,
-                    event -> button.setEffect(null));
-            makerScreen.getChildren().add(button);
-            if (!((count + 1) % 2 == 0)) {
-                button.setTranslateX(BUTTON_X_COORD);
-                addY += 50;
-            } else {
-                button.setTranslateX(BUTTON_X_COORD + 125);
-            }
-            button.setTranslateY(-225 + addY);
+            setColourButtonPosition(button, count);
         }
     }
 
     // MODIFIES: this
     // EFFECTS: changes the cat's base colour and updates the CatModel
     private void buttonAction(int colourNum) {
-        userCat.changeBase(COLOURS[colourNum]);
-        new CatModel(currentStage, makerScreen, userCat);
+        userCat.changeBase(BASES[colourNum]);
+        refreshCatModel();
     }
 }

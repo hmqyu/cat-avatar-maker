@@ -3,6 +3,7 @@ package ui;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,9 +17,6 @@ import model.cat.CatCollection;
 
 // Represents the load menu that allows the user to load a saved cat
 public class LoadPanel {
-    public static final int WIDTH = 650;    // width of the stage
-    public static final int HEIGHT = 500;   // height of the stage
-
     private CatCollection userCollection;   // the user's current cat collection
     private Stage currentStage;             // the current stage
     private StackPane loadScreen;           // the load screen
@@ -35,9 +33,9 @@ public class LoadPanel {
         userCat = cat;
         loadSavedCats();
         loadBackButton();
-        loadScreen.setStyle("-fx-background-color: #f5efed");
+        loadScreen.setStyle("-fx-background-color: " + MenuPanel.BG_COLOUR);
         currentStage = stage;
-        currentStage.setScene(new Scene(loadScreen, WIDTH, HEIGHT));
+        currentStage.setScene(new Scene(loadScreen, MenuPanel.WIDTH, MenuPanel.HEIGHT));
         currentStage.show();
     }
 
@@ -64,17 +62,8 @@ public class LoadPanel {
     // MODIFIES: this
     // EFFECTS: creates and loads a back button on loadScreen that allows the user to return to MenuPanel
     private void loadBackButton() {
-        ImageView quitButtonImage = new ImageView();
-        quitButtonImage.setImage(new Image("ui/images/system/BackButton.png"));
-        Button backButton = new Button("", quitButtonImage);
-        backButton.setStyle("-fx-background-color: transparent;");
+        Button backButton = (new ButtonVisualsMaker("system/BackButton")).getButton();
         backButton.setOnAction(event -> new MenuPanel(currentStage, userCat));
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> backButton.setEffect(shadow));
-        backButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> backButton.setEffect(null));
         loadScreen.getChildren().add(backButton);
         backButton.setTranslateY(200);
     }

@@ -1,26 +1,24 @@
 package ui.actions;
 
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
+import ui.ButtonVisualsMaker;
+import ui.CatModel;
 import ui.MakerPanel;
+import ui.MenuPanel;
 
 // Represents a base action panel for all maker buttons
-public class MakerAction {
-    public static final String[] COLOURS = {"Black", "Brown", "Tortoiseshell", "Red", "Cream", "Blue", "Silver",
-            "White"};   // all available colours for a cat's images
-    protected static final int BUTTON_X_COORD = 390;   // location of the buttons' x-coordinate
-    protected Stage currentStage;   // the current stage
-    protected StackPane makerScreen;   // the maker screen
-    protected Cat userCat;   // the user's current cat
-    protected CatCollection userCollection;   // the user's current cat collection
+public abstract class MakerAction {
+    protected static final int BUTTON_X_POS = MenuPanel.BUTTON_X_POS;   // location of the buttons' x-coordinate
+    protected static final int BUTTON_Y_POS = -50;                      // location of the buttons' y-coordinate
+    protected Stage currentStage;                                       // the current stage
+    protected StackPane makerScreen;                                    // the maker screen
+    protected Cat userCat;                                              // the user's current cat
+    protected CatCollection userCollection;                             // the user's current cat collection
+    protected int newYPos = 0;
 
     // EFFECTS: creates an interactive action panel with an okay button
     //          stage becomes the currentStage
@@ -33,24 +31,36 @@ public class MakerAction {
         userCat = cat;
         userCollection = collection;
         loadOkayButton();
+        loadColourButtons();
+    }
+
+    protected abstract void loadColourButtons();
+
+    // EFFECTS: refreshes the cat model to display new changes to it, if any
+    protected void refreshCatModel() {
+        new CatModel(currentStage, makerScreen, userCat);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds button to respective position based on count and newYPos
+    protected void setColourButtonPosition(Button button, int count) {
+        makerScreen.getChildren().add(button);
+        if (!((count + 1) % 2 == 0)) {
+            button.setTranslateX(BUTTON_X_POS);
+            newYPos += 50;
+        } else {
+            button.setTranslateX(BUTTON_X_POS + 125);
+        }
+        button.setTranslateY(-225 + newYPos);
     }
 
     // MODIFIES: this
     // EFFECTS: loads and creates an okay button that returns the user back to MakerPanel
     protected void loadOkayButton() {
-        ImageView buttonImage = new ImageView();
-        buttonImage.setImage(new Image("ui/images/system/OkayButton.png"));
-        Button button = new Button("", buttonImage);
-        button.setStyle("-fx-background-color: transparent;");
+        Button button = (new ButtonVisualsMaker("system/OkayButton")).getButton();
         button.setOnAction(event -> new MakerPanel(currentStage, userCat, userCollection));
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("0xc98d92"));
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                event -> button.setEffect(shadow));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED,
-                event -> button.setEffect(null));
         makerScreen.getChildren().add(button);
-        button.setTranslateX(BUTTON_X_COORD);
+        button.setTranslateX(BUTTON_X_POS);
         button.setTranslateY(200);
     }
 }

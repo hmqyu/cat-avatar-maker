@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
+import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
 // Represents an action panel for a cat's eye colours
@@ -20,6 +21,11 @@ public class EyesAction extends MakerAction {
     // EFFECTS: creates an action panel that lets the user change a cat's eye colours
     public EyesAction(Stage stage, StackPane screen, Cat cat, CatCollection collection) {
         super(stage, screen, cat, collection);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads and creates eye colour buttons that let the user change the cat's eye colours
+    protected void loadColourButtons() {
         loadLeftColourButtons();
         loadRightColourButtons();
     }
@@ -28,20 +34,11 @@ public class EyesAction extends MakerAction {
     // EFFECTS: loads and creates left eye colour buttons that let the user change the cat's left eye colour
     private void loadLeftColourButtons() {
         for (int count = 0; count < EYES.length; count++) {
-            ImageView buttonImage = new ImageView();
-            buttonImage.setImage(new Image("ui/images/system/eyes/" + EYES[count] + ".png"));
-            Button button = new Button("", buttonImage);
-            button.setStyle("-fx-background-color: transparent;");
+            Button button = (new ButtonVisualsMaker("system/eyes/" + EYES[count])).getButton();
             int finalCount = count;
             button.setOnAction(event -> leftButtonAction(finalCount));
-            DropShadow shadow = new DropShadow();
-            shadow.setColor(Color.web("0xc98d92"));
-            button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    event -> button.setEffect(shadow));
-            button.addEventHandler(MouseEvent.MOUSE_EXITED,
-                    event -> button.setEffect(null));
             makerScreen.getChildren().add(button);
-            button.setTranslateX(BUTTON_X_COORD);
+            button.setTranslateX(BUTTON_X_POS);
             button.setTranslateY(-225 + (count * 50));
         }
     }
@@ -50,20 +47,11 @@ public class EyesAction extends MakerAction {
     // EFFECTS: loads and creates right eye colour buttons that let the user change the cat's right eye colour
     private void loadRightColourButtons() {
         for (int count = 0; count < EYES.length; count++) {
-            ImageView buttonImage = new ImageView();
-            buttonImage.setImage(new Image("ui/images/system/eyes/" + EYES[count] + ".png"));
-            Button button = new Button("", buttonImage);
-            button.setStyle("-fx-background-color: transparent;");
+            Button button = (new ButtonVisualsMaker("system/eyes/" + EYES[count])).getButton();
             int finalCount = count;
             button.setOnAction(event -> rightButtonAction(finalCount));
-            DropShadow shadow = new DropShadow();
-            shadow.setColor(Color.web("0xc98d92"));
-            button.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    event -> button.setEffect(shadow));
-            button.addEventHandler(MouseEvent.MOUSE_EXITED,
-                    event -> button.setEffect(null));
             makerScreen.getChildren().add(button);
-            button.setTranslateX(BUTTON_X_COORD + 125);
+            button.setTranslateX(BUTTON_X_POS + 125);
             button.setTranslateY(-225 + (count * 50));
         }
     }
@@ -72,13 +60,13 @@ public class EyesAction extends MakerAction {
     // EFFECTS: changes the cat's left eye colour and updates the CatModel
     private void leftButtonAction(int colourNum) {
         userCat.changeLeftEye(EYES[colourNum]);
-        new CatModel(currentStage, makerScreen, userCat);
+        refreshCatModel();
     }
 
     // MODIFIES: this
     // EFFECTS: changes the cat's right eye colour and updates the CatModel
     private void rightButtonAction(int colourNum) {
         userCat.changeRightEye(EYES[colourNum]);
-        new CatModel(currentStage, makerScreen, userCat);
+        refreshCatModel();
     }
 }
