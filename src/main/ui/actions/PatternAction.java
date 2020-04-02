@@ -1,17 +1,11 @@
 package ui.actions;
 
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
-import ui.ButtonVisualsMaker;
-import ui.CatModel;
+import ui.ButtonVisuals;
 
 // Represents an action panel to change a cat's coat pattern
 public class PatternAction extends MakerAction {
@@ -30,7 +24,7 @@ public class PatternAction extends MakerAction {
     protected void loadColourButtons() {
         newYPos = BUTTON_Y_POS;
         for (int count = 0; count < COLOURS.length; count++) {
-            Button button = (new ButtonVisualsMaker("system/colours/" + COLOURS[count])).getButton();
+            Button button = (new ButtonVisuals("system/colours/" + COLOURS[count])).getButton();
             int finalCount = count;
             button.setOnAction(event -> buttonAction(finalCount));
             setColourButtonPosition(button, count);

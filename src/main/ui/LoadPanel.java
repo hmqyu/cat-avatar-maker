@@ -3,14 +3,10 @@ package ui;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
@@ -62,7 +58,7 @@ public class LoadPanel {
     // MODIFIES: this
     // EFFECTS: creates and loads a back button on loadScreen that allows the user to return to MenuPanel
     private void loadBackButton() {
-        Button backButton = (new ButtonVisualsMaker("system/BackButton")).getButton();
+        Button backButton = (new ButtonVisuals("system/BackButton")).getButton();
         backButton.setOnAction(event -> new MenuPanel(currentStage, userCat));
         loadScreen.getChildren().add(backButton);
         backButton.setTranslateY(200);

@@ -61,15 +61,15 @@ public class MakerPanel {
     // EFFECTS: creates and loads the base, pattern, eyes, skin, flip, accessories, background, save, and menu buttons,
     //          as well as the divider to separate buttons based on functionality
     private void loadMakerButtons() {
-        baseButton = (new ButtonVisualsMaker("system/BaseColour")).getButton();
-        patternButton = (new ButtonVisualsMaker("system/CoatPattern")).getButton();
-        eyesButton = (new ButtonVisualsMaker("system/EyeColour")).getButton();
-        skinButton = (new ButtonVisualsMaker("system/SkinColour")).getButton();
-        accessoriesButton = (new ButtonVisualsMaker("system/Accessories")).getButton();
-        backgroundButton = (new ButtonVisualsMaker("system/Background")).getButton();
-        flipButton = (new ButtonVisualsMaker("system/FlipDirection")).getButton();
-        saveButton = (new ButtonVisualsMaker("system/SaveCat")).getButton();
-        menuButton = (new ButtonVisualsMaker("system/MenuScreen")).getButton();
+        baseButton = (new ButtonVisuals("system/BaseColour")).getButton();
+        patternButton = (new ButtonVisuals("system/CoatPattern")).getButton();
+        eyesButton = (new ButtonVisuals("system/EyeColour")).getButton();
+        skinButton = (new ButtonVisuals("system/SkinColour")).getButton();
+        accessoriesButton = (new ButtonVisuals("system/Accessories")).getButton();
+        backgroundButton = (new ButtonVisuals("system/Background")).getButton();
+        flipButton = (new ButtonVisuals("system/FlipDirection")).getButton();
+        saveButton = (new ButtonVisuals("system/SaveCat")).getButton();
+        menuButton = (new ButtonVisuals("system/MenuScreen")).getButton();
         divider = new ImageView();
         divider.setImage(new Image("ui/images/system/Divider.png"));
         setButtonActions();
@@ -186,7 +186,7 @@ public class MakerPanel {
     private void finishedSavingCommand() {
         ImageView savedImage = new ImageView();
         savedImage.setImage(new Image("ui/images/system/Saved.png"));
-        Button button = (new ButtonVisualsMaker("system/SmallerOkayButton")).getButton();
+        Button button = (new ButtonVisuals("system/SmallerOkayButton")).getButton();
         button.setOnAction(event -> new MakerPanel(currentStage, userCat, userCollection));
         VBox savedBox = new VBox(10);
         savedBox.getChildren().addAll(savedImage, button);

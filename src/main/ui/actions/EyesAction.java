@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
-import ui.ButtonVisualsMaker;
+import ui.ButtonVisuals;
 
 // Represents an action panel to change a cat's eye colours
 public class EyesAction extends MakerAction {
@@ -23,7 +23,7 @@ public class EyesAction extends MakerAction {
         int eyeCounter = 1;
         newYPos = BUTTON_Y_POS;
         for (int count = 0; count < EYES.length; count++) {
-            Button button = (new ButtonVisualsMaker("system/eyes/" + EYES[count])).getButton();
+            Button button = (new ButtonVisuals("system/eyes/" + EYES[count])).getButton();
             int finalCount = count;
             int finalEyeCounter = eyeCounter;
             button.setOnAction(event -> buttonAction(finalCount, finalEyeCounter));

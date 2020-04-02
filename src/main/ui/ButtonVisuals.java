@@ -8,11 +8,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 // Adds different visuals for buttons specific to the CatMaker program
-public class ButtonVisualsMaker {
+public class ButtonVisuals {
     private Button button;
 
     // EFFECTS: creates a button and its visuals with the help of imageURL
-    public ButtonVisualsMaker(String imageURL) {
+    public ButtonVisuals(String imageURL) {
         ImageView buttonImage = new ImageView();
         buttonImage.setImage(new Image("ui/images/" + imageURL + ".png"));
         button = new Button("", buttonImage);

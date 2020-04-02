@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
-import ui.ButtonVisualsMaker;
+import ui.ButtonVisuals;
 import ui.CatModel;
 import ui.MakerPanel;
 import ui.MenuPanel;
@@ -52,7 +52,7 @@ public abstract class MakerAction {
     // MODIFIES: this
     // EFFECTS: loads and creates an okay button that returns the user back to MakerPanel
     protected void loadOkayButton() {
-        Button button = (new ButtonVisualsMaker("system/OkayButton")).getButton();
+        Button button = (new ButtonVisuals("system/OkayButton")).getButton();
         button.setOnAction(event -> new MakerPanel(currentStage, userCat, userCollection));
         makerScreen.getChildren().add(button);
         button.setTranslateX(BUTTON_X_POS);

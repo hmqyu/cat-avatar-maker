@@ -5,13 +5,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 import model.cat.CatCollection;
@@ -54,13 +51,13 @@ public class MenuPanel {
     // MODIFIES: this
     // EFFECTS: creates and loads the new, load, help, and quit buttons, and the header image on menuScreen
     private void loadMenuButtons() {
-        newButton = (new ButtonVisualsMaker("system/NewButton")).getButton();
+        newButton = (new ButtonVisuals("system/NewButton")).getButton();
         newButton.setOnAction(event -> new MakerPanel(currentStage, userCat, collection));
-        loadButton = (new ButtonVisualsMaker("system/LoadButton")).getButton();
+        loadButton = (new ButtonVisuals("system/LoadButton")).getButton();
         loadButton.setOnAction(event -> new LoadPanel(currentStage, collection, userCat));
-        helpButton = (new ButtonVisualsMaker("system/HelpButton")).getButton();
+        helpButton = (new ButtonVisuals("system/HelpButton")).getButton();
         helpButton.setOnAction(event -> new HelpPanel(currentStage, userCat));
-        quitButton = (new ButtonVisualsMaker("system/QuitButton")).getButton();
+        quitButton = (new ButtonVisuals("system/QuitButton")).getButton();
         quitButton.setOnAction(event -> System.exit(0));
         ImageView title = new ImageView();
         title.setImage(new Image("ui/images/system/CatAvatarMakerTitle.png"));

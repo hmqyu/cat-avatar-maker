@@ -2,12 +2,8 @@ package ui;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.cat.Cat;
 
@@ -37,7 +33,7 @@ public class HelpPanel {
     // MODIFIES: this
     // EFFECTS: creates and loads the back button onto helpScreen
     private void loadBackButton() {
-        Button backButton = (new ButtonVisualsMaker("system/BackButton")).getButton();
+        Button backButton = (new ButtonVisuals("system/BackButton")).getButton();
         backButton.setOnAction(event -> new MenuPanel(currentStage, userCat));
         helpScreen.getChildren().add(backButton);
         backButton.setTranslateX(185);
