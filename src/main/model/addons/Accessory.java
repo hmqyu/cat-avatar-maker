@@ -1,10 +1,11 @@
 package model.addons;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents accessories currently worn by a cat
 public class Accessory {
-    private ArrayList<String> accessories;   // the current list of accessories worn by a cat
+    private List<String> accessories;   // the current list of accessories worn by a cat
 
     // EFFECTS: creates a new list of accessories
     public Accessory() {
@@ -30,13 +31,12 @@ public class Accessory {
         if (accessories.contains(accessory)) {
             return false;
         }
-
         accessories.add(accessory);
         return true;
     }
 
     // EFFECTS: returns accessories
-    public ArrayList<String> getAllAccessories() {
+    public List<String> getAllAccessories() {
         return accessories;
     }
 

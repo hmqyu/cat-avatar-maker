@@ -13,7 +13,7 @@ import model.cat.CatCollection;
 import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's coat pattern
+// Represents an action panel to change a cat's coat pattern
 public class PatternAction extends MakerAction {
     protected static final String[] COLOURS = {"Black", "Brown", "Tortoiseshell", "Red", "Cream", "Blue", "Silver",
             "White"};   // all available colours for a cat's pattern button view

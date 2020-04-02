@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-// Adds different effects for buttons specific to the CatMaker program
+// Adds different visuals for buttons specific to the CatMaker program
 public class ButtonVisualsMaker {
     private Button button;
 
@@ -17,12 +17,12 @@ public class ButtonVisualsMaker {
         buttonImage.setImage(new Image("ui/images/" + imageURL + ".png"));
         button = new Button("", buttonImage);
         button.setStyle("-fx-background-color: transparent;");
-        addButtonDropShadow(button);
+        addDropShadow(button);
     }
 
     // MODIFIES: this
     // EFFECTS: adds drop shadow when the cursor hovers over the button
-    private void addButtonDropShadow(Button button) {
+    private void addDropShadow(Button button) {
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.web("0xc98d92"));
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,

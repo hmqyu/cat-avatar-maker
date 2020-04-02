@@ -4,10 +4,11 @@ import persistence.SaveData;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents a collection of cats that have been saved
 public class CatCollection implements SaveData {
-    private ArrayList<Cat> collection;   // a list of cats that have been saved
+    private List<Cat> collection;   // a list of cats that have been saved
 
     // EFFECTS: creates a collection to store cat information
     public CatCollection() {
@@ -32,7 +33,7 @@ public class CatCollection implements SaveData {
     }
 
     // EFFECTS: returns collection
-    public ArrayList<Cat> getCollection() {
+    public List<Cat> getCollection() {
         return collection;
     }
 

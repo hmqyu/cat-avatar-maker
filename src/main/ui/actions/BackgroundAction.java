@@ -13,7 +13,7 @@ import model.cat.CatCollection;
 import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's background image
+// Represents an action panel to change a cat's background image
 public class BackgroundAction extends MakerAction {
     public static final String[] BACKGROUNDS = {"Empty", "Beach", "Forest", "Home", "Nighttime"};   // all available
                                                                                                     // backgrounds for

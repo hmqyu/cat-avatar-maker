@@ -13,7 +13,7 @@ import model.cat.CatCollection;
 import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's wearable accessories
+// Represents an action panel to change a cat's wearable accessories
 public class AccessoriesAction extends MakerAction {
     public static final String[] ACCESSORIES = {"Bag", "Bow", "Hat", "Horns", "LeftHoopEarring", "RightHoopEarring",
             "LeftStudEarring", "RightStudEarring", "Mask", "Scarf", "Wings"};   // all available accessories for a cat

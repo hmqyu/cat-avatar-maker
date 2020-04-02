@@ -13,7 +13,7 @@ import model.cat.CatCollection;
 import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's skin colour
+// Represents an action panel to change a cat's skin colour
 public class SkinAction extends MakerAction {
     public static final String[] SKINS = {"Pink", "Mauve", "Black"};   // all available skin colours for a cat
 

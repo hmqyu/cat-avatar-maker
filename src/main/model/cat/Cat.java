@@ -6,7 +6,6 @@ import persistence.SaveData;
 import persistence.SaveDataReader;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 // Represents a cat with a name, base colour, coat pattern, nose colour,
@@ -143,7 +142,7 @@ public class Cat implements SaveData {
     }
 
     // EFFECTS: returns the ArrayList<String> within accessories
-    public ArrayList<String> getAccessories() {
+    public List<String> getAccessories() {
         return accessories.getAllAccessories();
     }
 

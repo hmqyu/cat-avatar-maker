@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import model.cat.Cat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents a cat avatar
 public class CatModel {
@@ -117,7 +118,7 @@ public class CatModel {
     // MODIFIES: this
     // EFFECTS: creates and renders the cat's accessories' images
     protected void renderAccessories() {
-        ArrayList<String> accessoriesList = userCat.getAccessories();
+        List<String> accessoriesList = userCat.getAccessories();
         for (String accessory : accessoriesList) {
             ImageView accessoryImage = new ImageView();
             accessoryImage.setImage(new Image("ui/images/accessories/" + accessory + ".png"));

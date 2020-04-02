@@ -10,7 +10,7 @@ import ui.CatModel;
 import ui.MakerPanel;
 import ui.MenuPanel;
 
-// Represents a base action panel for all maker buttons
+// Represents a base action panel for all maker buttons,
 public abstract class MakerAction {
     protected static final int BUTTON_X_POS = MenuPanel.BUTTON_X_POS;   // location of the buttons' x-coordinate
     protected static final int BUTTON_Y_POS = -50;                      // location of the buttons' y-coordinate
@@ -20,7 +20,7 @@ public abstract class MakerAction {
     protected CatCollection userCollection;                             // the user's current cat collection
     protected int newYPos = 0;
 
-    // EFFECTS: creates an interactive action panel with an okay button
+    // EFFECTS: creates an interactive action panel, with buttons to select various options drawn
     //          stage becomes the currentStage
     //          screen becomes the makerScreen
     //          cat becomes the user's current cat (userCat)
@@ -35,11 +35,6 @@ public abstract class MakerAction {
     }
 
     protected abstract void loadColourButtons();
-
-    // EFFECTS: refreshes the cat model to display new changes to it, if any
-    protected void refreshCatModel() {
-        new CatModel(currentStage, makerScreen, userCat);
-    }
 
     // MODIFIES: this
     // EFFECTS: adds button to respective position based on count and newYPos
@@ -62,5 +57,10 @@ public abstract class MakerAction {
         makerScreen.getChildren().add(button);
         button.setTranslateX(BUTTON_X_POS);
         button.setTranslateY(200);
+    }
+
+    // EFFECTS: refreshes the cat model to display new changes to it, if any
+    protected void refreshCatModel() {
+        new CatModel(currentStage, makerScreen, userCat);
     }
 }

@@ -55,6 +55,47 @@ It is very useful when debugging the code, as it indicates there's an issue with
 data that is being written rather than something else (eg. another array that deals with 
 displaying accessories in the GUI).
 
-This method is tested in the SaveDataReaderTest class. It is tested throughout all the tests, 
-including a specific test where the exception is expected to occur. This test is called 
-testSaveDataException and begins at line 99.
+This method is tested in the SaveDataReaderTest class. All tests in that class either test the
+case where the exception is not expected, or where the exception is expected. The test where
+the exception is expected is called testSaveDataException and begins on line 99.
+
+## Phase 4: Task 3
+
+**1\)** One of the biggest issues I noticed was that there was a lot of repeated code in my 
+GUI/UI
+package. Most of this repeated code occurred when creating new buttons, as practically every
+button used (ie. all but the buttons used for cat names in the LoadPanel class) had a specific 
+background image and drop shadow. With each class having anywhere from 1 to 11 of 
+similarly-created buttons, my program had incredibly high coupling.
+
+To combat this, I decided to make a new class called ButtonVisualsMaker. Using its constructor,
+I could retrieve a button's background image through a String parameter. Then I would be
+able to create a button with its respective image and drop shadow (the latter using the
+addDropShadow method to do so), for any button used in the GUI (excluding the ones used for the
+cat names in the LoadPanel class). This dramatically reduced same-code repetition between 
+classes, leading to looser coupling. As well, this increased cohesion because the panel classes,
+whose main jobs were to create interactive scenes, no longer had to process the visuals of
+their buttons directly.
+
+**2\)** Doing this made me realize that there was also heavy repetition present in the 
+MakerAction class and subclasses. Each class was essentially a clone of itself with very minor 
+changes specific to the action that needs to be done. Namely, several classes employed the same
+for-loop structure to create and place buttons on a StackPane at certain, static positions. As 
+well, all the constructors for those classes were virtually the same (all but one called the 
+super constructor and a method called loadColourButtons).
+
+Here, I chose to turn the MakerAction class into an abstract class, and turn the
+loadColourButtons method into an abstract method in the MakerAction class. This removed the
+variation in the subclass constructors, as now they all relied on the superclass' constructor.
+Since MakerAction was never directly instantiated, making this change did not affect the
+rest of the GUI. I aso created a method called setColourButtonPosition, which would handle
+setting each button's position at their intended location. Additionally, a refreshCatModel 
+method was implemented to handle refreshing the cat model after changing something about it, 
+which was used in each MakerAction subclass' buttonAction. I also ended up refactoring the 
+EyesAction class to reduce internal code repetition as well. 
+
+Again, this reduced same-code repetition between classes, also leading to looser coupling (but 
+maybe not to the same extent as before). Arguably, cohesion increased as well: MakerAction and 
+its subclasses adhere better to the Single Responsibility Principle. This is because 
+MakerAction solely handles creating the button visuals on the action panels, and MakerAction's 
+subclasses now only handle changing their respective part of a cat through the buttons.

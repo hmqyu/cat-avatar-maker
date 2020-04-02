@@ -13,7 +13,7 @@ import model.cat.CatCollection;
 import ui.ButtonVisualsMaker;
 import ui.CatModel;
 
-// Represents an action panel for a cat's base colour
+// Represents an action panel to change a cat's base colour
 public class BaseAction extends MakerAction {
     protected static final String[] BASES = {"Black", "Brown", "Tortoiseshell", "Red", "Cream", "Blue", "Silver",
             "White"};   // all available base colours for a cat
