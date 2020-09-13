@@ -1,4 +1,4 @@
-# My Personal Project - Cat Pixel Maker
+# My Personal Project - Cat Avatar Maker
 
 ## Introduction
 
